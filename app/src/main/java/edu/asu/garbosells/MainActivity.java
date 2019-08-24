@@ -49,7 +49,6 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.Choo
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.AuthenticationHandler;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.ForgotPasswordHandler;
 
-import edu.asu.garbosells.UserManagement.AboutApp;
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.ChooseMFA;
 import edu.asu.garbosells.UserManagement.ForgotPasswordActivity;
@@ -57,7 +56,7 @@ import edu.asu.garbosells.UserManagement.MFAActivity;
 import edu.asu.garbosells.UserManagement.NewPassword;
 import edu.asu.garbosells.UserManagement.RegisterUser;
 import edu.asu.garbosells.UserManagement.SignUpConfirm;
-import edu.asu.garbosells.UserManagement.UserActivity;
+import edu.asu.garbosells.UserManagement.SettingsActivity;
 
 import java.util.List;
 import java.util.Locale;
@@ -290,12 +289,6 @@ public class MainActivity extends AppCompatActivity {
                 // User has forgotten the password, start the process to set a new password
                 forgotpasswordUser();
                 break;
-            case R.id.nav_about:
-                // For the inquisitive
-                Intent aboutAppActivity = new Intent(this, AboutApp.class);
-                startActivity(aboutAppActivity);
-                break;
-
         }
     }
 
@@ -412,7 +405,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchUser() {
-        Intent userActivity = new Intent(this, UserActivity.class);
+        Intent userActivity = new Intent(this, SettingsActivity.class);
         userActivity.putExtra("name", username);
         startActivityForResult(userActivity, 4);
     }
