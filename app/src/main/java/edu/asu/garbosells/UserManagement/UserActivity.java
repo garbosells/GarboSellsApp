@@ -183,11 +183,6 @@ public class UserActivity extends AppCompatActivity {
 
         // Find which item was selected
         switch(item.getItemId()) {
-            case R.id.nav_user_add_attribute:
-                // Add a new attribute
-                addAttribute();
-                break;
-
             case R.id.nav_user_change_password:
                 // Change password
                 changePassword();
@@ -257,20 +252,6 @@ public class UserActivity extends AppCompatActivity {
     private void showSettings() {
         Intent userSettingsActivity = new Intent(this,SettingsActivity.class);
         startActivityForResult(userSettingsActivity, 20);
-    }
-
-    // Add a new attribute
-    private void addAttribute() {
-        Intent addAttrbutesActivity = new Intent(this, AddAttributeActivity.class);
-        startActivityForResult(addAttrbutesActivity, 22);
-    }
-
-    // Delete attribute
-    private void deleteAttribute(String attributeName) {
-        showWaitDialog("Deleting...");
-        List<String> attributesToDelete = new ArrayList<>();
-        attributesToDelete.add(attributeName);
-        AppHelper.getPool().getUser(AppHelper.getCurrUser()).deleteAttributesInBackground(attributesToDelete, deleteHandler);
     }
 
     // Change user password
@@ -454,16 +435,6 @@ public class UserActivity extends AppCompatActivity {
                         updateAttribute(AppHelper.getSignUpFieldsC2O().get(attributeType), newValue);
                     }
                     userDialog.dismiss();
-                } catch (Exception e) {
-                    // Log failure
-                }
-            }
-        }).setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                try {
-                    userDialog.dismiss();
-                    deleteAttribute(AppHelper.getSignUpFieldsC2O().get(attributeType));
                 } catch (Exception e) {
                     // Log failure
                 }
