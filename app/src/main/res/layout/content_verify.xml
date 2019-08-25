@@ -23,74 +23,23 @@
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:layout_marginTop="@dimen/activity_vertical_margin"
-    tools:context="com.amazonaws.youruserpools.VerifyActivity"
+    tools:context="edu.asu.garbosells.UserManagement.VerifyActivity"
     tools:showIn="@layout/activity_verify">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Verify email and phone number"
+        android:text="Verify Email"
         android:id="@+id/textViewVerifyTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_inter_group_separation"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textViewVerifyTitle"
-        android:id="@+id/space_Verify_1" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Phone number"
-        android:id="@+id/textViewVerifyPhoneText"
-        android:layout_below="@+id/space_Verify_1"
-        android:layout_centerHorizontal="true" />
-
-    <Space
-        android:layout_width="match_parent"
         android:layout_height="@dimen/activity_text_padding"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/textViewVerifyPhoneText"
-        android:id="@+id/space_Verify_2" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Send code"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/activity_button_text_size"
-        android:id="@+id/buttonVerifyPhone"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/space_Verify_2"
-        android:background="@drawable/button_selector" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_inter_group_separation"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/buttonVerifyPhone"
-        android:id="@+id/space_Verify_2A" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Email"
-        android:id="@+id/textViewVerifyEmailText"
-        android:layout_below="@+id/space_Verify_2A"
-        android:layout_centerHorizontal="true" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_text_padding"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/textViewVerifyEmailText"
+        android:layout_below="@id/textViewVerifyTitle"
         android:id="@+id/space_Verify_3" />
 
     <Button

@@ -436,31 +436,20 @@ public class AppHelper {
         // Set attribute display sequence
         attributeDisplaySeq = new ArrayList<String>();
         attributeDisplaySeq.add("given_name");
-        attributeDisplaySeq.add("middle_name");
         attributeDisplaySeq.add("family_name");
-        attributeDisplaySeq.add("nickname");
-        attributeDisplaySeq.add("phone_number");
         attributeDisplaySeq.add("email");
 
         signUpFieldsC2O = new HashMap<String, String>();
-        signUpFieldsC2O.put("Given name", "given_name");
-        signUpFieldsC2O.put("Family name", "family_name");
-        signUpFieldsC2O.put("Nick name", "nickname");
-        signUpFieldsC2O.put("Phone number", "phone_number");
-        signUpFieldsC2O.put("Phone number verified", "phone_number_verified");
+        signUpFieldsC2O.put("First name", "given_name");
+        signUpFieldsC2O.put("Last  name", "family_name");
         signUpFieldsC2O.put("Email verified", "email_verified");
         signUpFieldsC2O.put("Email","email");
-        signUpFieldsC2O.put("Middle name","middle_name");
 
         signUpFieldsO2C = new HashMap<String, String>();
-        signUpFieldsO2C.put("given_name", "Given name");
-        signUpFieldsO2C.put("family_name", "Family name");
-        signUpFieldsO2C.put("nickname", "Nick name");
-        signUpFieldsO2C.put("phone_number", "Phone number");
-        signUpFieldsO2C.put("phone_number_verified", "Phone number verified");
+        signUpFieldsO2C.put("given_name", "First name");
+        signUpFieldsO2C.put("family_name", "Last name");
         signUpFieldsO2C.put("email_verified", "Email verified");
         signUpFieldsO2C.put("email", "Email");
-        signUpFieldsO2C.put("middle_name", "Middle name");
 
     }
 
@@ -487,15 +476,9 @@ public class AppHelper {
             if(attr.getKey().contains("email_verified")) {
                 emailVerified = attr.getValue().contains("true");
             }
-            else if(attr.getKey().contains("phone_number_verified")) {
-                phoneVerified = attr.getValue().contains("true");
-            }
 
             if(attr.getKey().equals("email")) {
                 emailAvailable = true;
-            }
-            else if(attr.getKey().equals("phone_number")) {
-                phoneAvailable = true;
             }
         }
 
@@ -517,18 +500,6 @@ public class AppHelper {
                     else {
                         item.setDataDrawable("not_checked");
                         item.setMessageText("Email not verified");
-                        item.setMessageColor(Color.parseColor("#E94700"));
-                    }
-                }
-
-                if(det.contains("phone_number")) {
-                    if(phoneVerified) {
-                        item.setDataDrawable("checked");
-                        item.setMessageText("Phone number verified");
-                    }
-                    else {
-                        item.setDataDrawable("not_checked");
-                        item.setMessageText("Phone number not verified");
                         item.setMessageColor(Color.parseColor("#E94700"));
                     }
                 }

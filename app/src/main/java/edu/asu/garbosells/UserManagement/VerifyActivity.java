@@ -86,7 +86,6 @@ public class VerifyActivity extends AppCompatActivity {
 
     private void init() {
         verifCode = (EditText) findViewById(R.id.editTextVerifyCode);
-        reqPhoneVerf = (Button) findViewById(R.id.buttonVerifyPhone);
         reqEmailVerf = (Button) findViewById(R.id.buttonVerifyEmail);
         sendVerfCode = (Button) findViewById(R.id.buttonSendVerifyCode);
 
@@ -111,26 +110,6 @@ public class VerifyActivity extends AppCompatActivity {
             reqEmailVerf.setClickable(false);
         }
 
-        if(AppHelper.isPhoneAvailable()) {
-            if(AppHelper.isPhoneVerified()) {
-                reqPhoneVerf.setClickable(false);
-                reqPhoneVerf.setBackground(getDrawable(R.drawable.button_success));
-                reqPhoneVerf.setText("Phone number verified");
-                reqPhoneVerf.setTextColor(Color.parseColor("#37A51C"));
-            }
-            else {
-                reqPhoneVerf.setText("Send code");
-                reqPhoneVerf.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        reqPhoneCode();
-                    }
-                });
-            }
-        }
-        else {
-            reqPhoneVerf.setClickable(false);
-        }
         hideCodeTX();
     }
 
@@ -139,14 +118,6 @@ public class VerifyActivity extends AppCompatActivity {
         reqEmailVerf.setBackground(getDrawable(R.drawable.button_selected));
         reqEmailVerf.setText("Resend code");
         reqEmailVerf.setTextColor(Color.parseColor("#2A5C91"));
-        reqVerfCode();
-    }
-
-    private void reqPhoneCode() {
-        attrReqCode = "phone_number";
-        reqPhoneVerf.setBackground(getDrawable(R.drawable.button_selected));
-        reqPhoneVerf.setText("Resend code");
-        reqPhoneVerf.setTextColor(Color.parseColor("#2A5C91"));
         reqVerfCode();
     }
 
@@ -223,14 +194,7 @@ public class VerifyActivity extends AppCompatActivity {
             // Store details in the AppHandler
             AppHelper.setUserDetails(cognitoUserDetails);
 
-            if(attrReqCode.equals("phone_number")) {
-                reqPhoneVerf.setBackground(getDrawable(R.drawable.button_success));
-                reqPhoneVerf.setText("Phone number verified");
-                reqPhoneVerf.setTextColor(Color.parseColor("#37A51C"));
-                reqPhoneVerf.setClickable(false);
-                Toast.makeText(getApplicationContext(), "Phone number verified", Toast.LENGTH_LONG).show();
-            }
-            else if(attrReqCode.equals("email")) {
+            if(attrReqCode.equals("email")) {
                 reqEmailVerf.setBackground(getDrawable(R.drawable.button_success));
                 reqEmailVerf.setText("Email verified");
                 reqEmailVerf.setTextColor(Color.parseColor("#37A51C"));
@@ -244,14 +208,7 @@ public class VerifyActivity extends AppCompatActivity {
             closeWaitDialog();
 
             // Attributes were verified but user detals read was not successful
-            if(attrReqCode.equals("phone_number")) {
-                reqPhoneVerf.setBackground(getDrawable(R.drawable.button_success));
-                reqPhoneVerf.setText("Phone number verified");
-                reqPhoneVerf.setTextColor(Color.parseColor("#37A51C"));
-                reqPhoneVerf.setClickable(false);
-                Toast.makeText(getApplicationContext(), "Phone number verified", Toast.LENGTH_LONG).show();
-            }
-            else if(attrReqCode.equals("email")) {
+            if(attrReqCode.equals("email")) {
                 reqEmailVerf.setBackground(getDrawable(R.drawable.button_success));
                 reqEmailVerf.setText("Email verified");
                 reqEmailVerf.setTextColor(Color.parseColor("#37A51C"));

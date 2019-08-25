@@ -33,6 +33,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -101,6 +102,30 @@ public class SettingsActivity extends AppCompatActivity {
         View navigationHeader = nDrawer.getHeaderView(0);
         TextView navHeaderSubTitle = (TextView) navigationHeader.findViewById(R.id.textViewNavUserSub);
         navHeaderSubTitle.setText(username);
+
+      Button verifyEmailButton = findViewById(R.id.buttonVerifyEmailButtonInSettings);
+      verifyEmailButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          emailVerification();
+        }
+      });
+
+      Button changePasswordButton = findViewById(R.id.buttonChangePasswordButtonInSettings);
+      changePasswordButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          changePassword();
+        }
+      });
+
+      Button reviewDevicesButton = findViewById(R.id.buttonReviewDevicesButtonInSettings);
+      reviewDevicesButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          showTrustedDevices();
+        }
+      });
     }
 
     @Override
@@ -183,25 +208,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         // Find which item was selected
         switch(item.getItemId()) {
-            case R.id.nav_user_change_password:
-                // Change password
-                changePassword();
-                break;
-            case R.id.nav_user_verify_attribute:
-                // Confirm new user
-                // confirmUser();
-                attributesVerification();
-                break;
-            case R.id.nav_user_settings:
-                // Show user settings
-                showSettings();
-                break;
             case R.id.nav_user_sign_out:
                 // Sign out from this account
                 signOut();
-                break;
-            case R.id.nav_user_trusted_devices:
-                showTrustedDevices();
                 break;
         }
     }
@@ -243,12 +252,6 @@ public class SettingsActivity extends AppCompatActivity {
         AppHelper.getPool().getUser(AppHelper.getCurrUser()).updateAttributesInBackground(updatedUserAttributes, updateHandler);
     }
 
-    // Show user MFA Settings
-    private void showSettings() {
-        Intent userSettingsActivity = new Intent(this,SettingsActivity.class);
-        startActivityForResult(userSettingsActivity, 20);
-    }
-
     // Change user password
     private void changePassword() {
         Intent changePssActivity = new Intent(this, ChangePasswordActivity.class);
@@ -256,7 +259,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     // Verify attributes
-    private void attributesVerification() {
+    private void emailVerification() {
         Intent attrbutesActivity = new Intent(this,VerifyActivity.class);
         startActivityForResult(attrbutesActivity, 21);
     }
