@@ -51,6 +51,7 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GetDetail
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.UpdateAttributesHandler;
 
 import edu.asu.garbosells.R;
+import edu.asu.garbosells.UserManagement.Adapters.UserAttributesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

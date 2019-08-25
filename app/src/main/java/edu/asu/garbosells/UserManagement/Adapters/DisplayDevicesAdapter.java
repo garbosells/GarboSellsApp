@@ -15,8 +15,7 @@
  * limitations under the License.
  */
 
-package edu.asu.garbosells.UserManagement;
-
+package edu.asu.garbosells.UserManagement.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -29,19 +28,23 @@ import edu.asu.garbosells.R;
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.ItemToDisplay;
 
-public class UserAttributesAdapter extends BaseAdapter {
-    private String TAG = "UserAttributesAdapter";
+/**
+ * Adapter to show device details on the screen.
+ */
+public class DisplayDevicesAdapter extends BaseAdapter {
+    private String TAG = "DisplayDevicesAdapter";
     private Context context;
     private int count;
     private static LayoutInflater layoutInflater;
 
-    public UserAttributesAdapter(Context context) {
+    public DisplayDevicesAdapter(Context context) {
         this.context = context;
 
-        count = AppHelper.getItemCount();
+        count = AppHelper.getDevicesCount();
 
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
     @Override
     public int getCount() {
         return count;
@@ -61,7 +64,7 @@ public class UserAttributesAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder;
 
-        if(convertView == null) {
+        if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.fields_generic, null);
             holder = new Holder();
             holder.label = (TextView) convertView.findViewById(R.id.textViewUserDetailLabel);
@@ -69,12 +72,11 @@ public class UserAttributesAdapter extends BaseAdapter {
             holder.message = (TextView) convertView.findViewById(R.id.textViewUserDetailMessage);
 
             convertView.setTag(holder);
-        }
-        else {
+        } else {
             holder = (Holder) convertView.getTag();
         }
 
-        ItemToDisplay item = AppHelper.getItemForDisplay(position);
+        ItemToDisplay item = AppHelper.getDeviceForDisplay(position);
         holder.label.setText(item.getLabelText());
         holder.label.setTextColor(item.getLabelColor());
         holder.data.setHint(item.getLabelText());
@@ -94,6 +96,7 @@ public class UserAttributesAdapter extends BaseAdapter {
         holder.message.setTextColor(item.getMessageColor());
 
         return convertView;
+
     }
 
     // Helper class to recycle View's

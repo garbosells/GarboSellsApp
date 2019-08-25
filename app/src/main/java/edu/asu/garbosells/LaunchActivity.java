@@ -50,9 +50,7 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.Authentic
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.ForgotPasswordHandler;
 
 import edu.asu.garbosells.UserManagement.AppHelper;
-import edu.asu.garbosells.UserManagement.ChooseMFA;
 import edu.asu.garbosells.UserManagement.ForgotPasswordActivity;
-import edu.asu.garbosells.UserManagement.MFAActivity;
 import edu.asu.garbosells.UserManagement.NewPassword;
 import edu.asu.garbosells.UserManagement.RegisterUser;
 import edu.asu.garbosells.UserManagement.SignUpConfirm;
@@ -62,8 +60,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
-    private final String TAG="MainActivity";
+public class LaunchActivity extends AppCompatActivity {
+    private final String TAG="LaunchActivity";
 
     private NavigationView nDrawer;
     private DrawerLayout mDrawer;
@@ -348,22 +346,9 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, 3);
     }
 
-    private void mfaAuth(MultiFactorAuthenticationContinuation continuation) {
-        multiFactorAuthenticationContinuation = continuation;
-        Intent mfaActivity = new Intent(this, MFAActivity.class);
-        mfaActivity.putExtra("mode", multiFactorAuthenticationContinuation.getParameters().getDeliveryMedium());
-        startActivityForResult(mfaActivity, 5);
-    }
-
     private void firstTimeSignIn() {
         Intent newPasswordActivity = new Intent(this, NewPassword.class);
         startActivityForResult(newPasswordActivity, 6);
-    }
-
-    private void selectMfaToSignIn(List<String> options, Map<String, String> parameters) {
-        Intent chooseMfaActivity = new Intent(this, ChooseMFA.class);
-        AppHelper.setMfaOptionsForDisplay(options, parameters);
-        startActivityForResult(chooseMfaActivity, 7);
     }
 
     private void conitnueWithSelectedMfa(String option) {
@@ -546,8 +531,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void getMFACode(MultiFactorAuthenticationContinuation multiFactorAuthenticationContinuation) {
-            closeWaitDialog();
-            mfaAuth(multiFactorAuthenticationContinuation);
+
         }
 
         @Override
@@ -577,11 +561,6 @@ public class MainActivity extends AppCompatActivity {
                         newPasswordContinuation.getRequiredAttributes());
                 closeWaitDialog();
                 firstTimeSignIn();
-            } else if ("SELECT_MFA_TYPE".equals(continuation.getChallengeName())) {
-                closeWaitDialog();
-                mfaOptionsContinuation = (ChooseMfaContinuation) continuation;
-                List<String> mfaOptions = mfaOptionsContinuation.getMfaOptions();
-                selectMfaToSignIn(mfaOptions, continuation.getParameters());
             }
         }
     };

@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 
-package edu.asu.garbosells.UserManagement;
+package edu.asu.garbosells.UserManagement.Adapters;
+
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -25,17 +26,19 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import edu.asu.garbosells.R;
+import edu.asu.garbosells.UserManagement.AppHelper;
+import edu.asu.garbosells.UserManagement.ItemToDisplay;
 
-public class FirstTimeLoginAttributesDisplayAdapter extends BaseAdapter {
-    private String TAG = "FirstTimeLoginDetails";
+public class UserAttributesAdapter extends BaseAdapter {
+    private String TAG = "UserAttributesAdapter";
     private Context context;
     private int count;
     private static LayoutInflater layoutInflater;
 
-    public FirstTimeLoginAttributesDisplayAdapter(Context context) {
+    public UserAttributesAdapter(Context context) {
         this.context = context;
 
-        count = AppHelper.getFirstTimeLogInItemsCount();
+        count = AppHelper.getItemCount();
 
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -71,12 +74,22 @@ public class FirstTimeLoginAttributesDisplayAdapter extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        ItemToDisplay item = AppHelper.getUserAttributeForFirstLogInCheck(position);
+        ItemToDisplay item = AppHelper.getItemForDisplay(position);
         holder.label.setText(item.getLabelText());
         holder.label.setTextColor(item.getLabelColor());
         holder.data.setHint(item.getLabelText());
         holder.data.setText(item.getDataText());
         holder.data.setTextColor(item.getDataColor());
+        int resID = 0;
+        if(item.getDataDrawable() != null) {
+            if(item.getDataDrawable().equals("checked")) {
+                resID = R.drawable.checked;
+            }
+            else if(item.getDataDrawable().equals("not_checked")) {
+                resID = R.drawable.not_checked;
+            }
+        }
+        holder.data.setCompoundDrawablesWithIntrinsicBounds(0, 0, resID, 0);
         holder.message.setText(item.getMessageText());
         holder.message.setTextColor(item.getMessageColor());
 

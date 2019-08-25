@@ -36,6 +36,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import edu.asu.garbosells.R;
+import edu.asu.garbosells.UserManagement.Adapters.FirstTimeLoginAttributesDisplayAdapter;
 
 public class NewPassword extends AppCompatActivity {
     private String TAG = "NewPassword";

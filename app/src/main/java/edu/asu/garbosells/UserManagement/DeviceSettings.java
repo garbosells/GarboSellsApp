@@ -37,6 +37,7 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoDevice;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.DevicesHandler;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GenericHandler;
 import edu.asu.garbosells.R;
+import edu.asu.garbosells.UserManagement.Adapters.DisplayDevicesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package edu.asu.garbosells.UserManagement;
+package edu.asu.garbosells.UserManagement.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -25,24 +25,22 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import edu.asu.garbosells.R;
+import edu.asu.garbosells.UserManagement.AppHelper;
+import edu.asu.garbosells.UserManagement.ItemToDisplay;
 
-/**
- * Adapter to show device details on the screen.
- */
-public class DisplayDevicesAdapter extends BaseAdapter {
-    private String TAG = "DisplayDevicesAdapter";
+public class FirstTimeLoginAttributesDisplayAdapter extends BaseAdapter {
+    private String TAG = "FirstTimeLoginDetails";
     private Context context;
     private int count;
     private static LayoutInflater layoutInflater;
 
-    public DisplayDevicesAdapter(Context context) {
+    public FirstTimeLoginAttributesDisplayAdapter(Context context) {
         this.context = context;
 
-        count = AppHelper.getDevicesCount();
+        count = AppHelper.getFirstTimeLogInItemsCount();
 
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-
     @Override
     public int getCount() {
         return count;
@@ -62,7 +60,7 @@ public class DisplayDevicesAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder;
 
-        if (convertView == null) {
+        if(convertView == null) {
             convertView = layoutInflater.inflate(R.layout.fields_generic, null);
             holder = new Holder();
             holder.label = (TextView) convertView.findViewById(R.id.textViewUserDetailLabel);
@@ -70,31 +68,21 @@ public class DisplayDevicesAdapter extends BaseAdapter {
             holder.message = (TextView) convertView.findViewById(R.id.textViewUserDetailMessage);
 
             convertView.setTag(holder);
-        } else {
+        }
+        else {
             holder = (Holder) convertView.getTag();
         }
 
-        ItemToDisplay item = AppHelper.getDeviceForDisplay(position);
+        ItemToDisplay item = AppHelper.getUserAttributeForFirstLogInCheck(position);
         holder.label.setText(item.getLabelText());
         holder.label.setTextColor(item.getLabelColor());
         holder.data.setHint(item.getLabelText());
         holder.data.setText(item.getDataText());
         holder.data.setTextColor(item.getDataColor());
-        int resID = 0;
-        if(item.getDataDrawable() != null) {
-            if(item.getDataDrawable().equals("checked")) {
-                resID = R.drawable.checked;
-            }
-            else if(item.getDataDrawable().equals("not_checked")) {
-                resID = R.drawable.not_checked;
-            }
-        }
-        holder.data.setCompoundDrawablesWithIntrinsicBounds(0, 0, resID, 0);
         holder.message.setText(item.getMessageText());
         holder.message.setTextColor(item.getMessageColor());
 
         return convertView;
-
     }
 
     // Helper class to recycle View's
