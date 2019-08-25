@@ -46,7 +46,7 @@
 
             <!-- Set the Main content -->
 
-            <include layout="@layout/content_main" />
+            <include layout="@layout/content_launch" />
         </RelativeLayout>
 
     </ScrollView>

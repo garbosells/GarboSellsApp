@@ -52,11 +52,8 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.ForgotPas
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.ForgotPasswordActivity;
 import edu.asu.garbosells.UserManagement.NewPassword;
-import edu.asu.garbosells.UserManagement.RegisterUser;
-import edu.asu.garbosells.UserManagement.SignUpConfirm;
 import edu.asu.garbosells.UserManagement.SettingsActivity;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -88,7 +85,7 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_launch);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Set toolbar for this screen
@@ -239,12 +236,6 @@ public class LaunchActivity extends AppCompatActivity {
         }
     }
 
-    // App methods
-    // Register user - start process
-    public void signUp(View view) {
-        signUpNewUser();
-    }
-
     // Login if a user is already present
     public void logIn(View view) {
         signInUser();
@@ -275,24 +266,11 @@ public class LaunchActivity extends AppCompatActivity {
 
         // Find which item was selected
         switch(item.getItemId()) {
-            case R.id.nav_sign_up:
-                // Start sign-up
-                signUpNewUser();
-                break;
-            case R.id.nav_sign_up_confirm:
-                // Confirm new user
-                confirmUser();
-                break;
             case R.id.nav_sign_in_forgot_password:
                 // User has forgotten the password, start the process to set a new password
                 forgotpasswordUser();
                 break;
         }
-    }
-
-    private void signUpNewUser() {
-        Intent registerActivity = new Intent(this, RegisterUser.class);
-        startActivityForResult(registerActivity, 1);
     }
 
     private void signInUser() {
@@ -380,13 +358,6 @@ public class LaunchActivity extends AppCompatActivity {
 
             showDialogMessage("Sign-in failed", AppHelper.formatException(e));
         }
-    }
-
-    private void confirmUser() {
-        Intent confirmActivity = new Intent(this, SignUpConfirm.class);
-        confirmActivity.putExtra("source","main");
-        startActivityForResult(confirmActivity, 2);
-
     }
 
     private void launchUser() {
