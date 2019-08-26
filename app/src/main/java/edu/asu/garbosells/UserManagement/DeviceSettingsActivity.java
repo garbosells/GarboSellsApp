@@ -42,8 +42,8 @@ import edu.asu.garbosells.UserManagement.Adapters.DisplayDevicesAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeviceSettings extends AppCompatActivity {
-    private String TAG = "DeviceSettings";
+public class DeviceSettingsActivity extends AppCompatActivity {
+    private String TAG = "DeviceSettingsActivity";
 
     private String username;
     private AlertDialog userDialog;

@@ -372,48 +372,6 @@ public class AppHelper {
             return null;
         }
     }
-
-    public static void setMfaOptionsForDisplay(List<String> options, Map<String, String> parameters) {
-        mfaAllOptionsCode = options;
-        mfaOptions = new ArrayList<ItemToDisplay>();
-        String textToDisplay = "";
-        for (String option: options) {
-            if ("SMS_MFA".equals(option)) {
-                textToDisplay = "Send SMS";
-                if (parameters.containsKey("CODE_DELIVERY_DESTINATION")) {
-                    textToDisplay = textToDisplay + " to "+ parameters.get("CODE_DELIVERY_DESTINATION");
-                }
-            } else if ("SOFTWARE_TOKEN_MFA".equals(option)) {
-                textToDisplay = "Use TOTP";
-                if (parameters.containsKey("FRIENDLY_DEVICE_NAME")) {
-                    textToDisplay = textToDisplay + ": " + parameters.get("FRIENDLY_DEVICE_NAME");
-                }
-            }
-            ItemToDisplay item = new ItemToDisplay("", textToDisplay, "", Color.BLACK, Color.DKGRAY, Color.parseColor("#329AD6"), 0, null);
-            mfaOptions.add(item);
-            textToDisplay = "Unsupported MFA";
-        }
-    }
-
-    public static List<String> getAllMfaOptions() {
-        return mfaAllOptionsCode;
-    }
-
-    public static String getMfaOptionCode(int position) {
-        return mfaAllOptionsCode.get(position);
-    }
-
-    public static ItemToDisplay getMfaOptionForDisplay(int position) {
-        if (position >= mfaOptions.size()) {
-            return new ItemToDisplay(" ", " ", " ", Color.BLACK, Color.DKGRAY, Color.parseColor("#37A51C"), 0, null);
-        }
-        return mfaOptions.get(position);
-    }
-
-    public static int getMfaOptionsCount() {
-        return mfaOptions.size();
-    }
-
     //public static
 
     public static CognitoDevice getNewDevice() {

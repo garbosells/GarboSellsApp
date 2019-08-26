@@ -132,7 +132,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity_user_menu, menu);
+        getMenuInflater().inflate(R.menu.activity_settings_drawer, menu);
         return true;
     }
 
@@ -140,15 +140,6 @@ public class SettingsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Find which menu item was selected
         int menuItem = item.getItemId();
-
-        // Do the task
-        if(menuItem == R.id.user_update_attribute) {
-            //updateAllAttributes();
-            showWaitDialog("Updating...");
-            getDetails();
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -266,7 +257,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void showTrustedDevices() {
-        Intent trustedDevicesActivity = new Intent(this, DeviceSettings.class);
+        Intent trustedDevicesActivity = new Intent(this, DeviceSettingsActivity.class);
         startActivity(trustedDevicesActivity);
     }
 

@@ -59,6 +59,6 @@
         android:fitsSystemWindows="true"
         android:background="@color/toolbar_items"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_launch_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

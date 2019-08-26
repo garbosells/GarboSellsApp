@@ -51,7 +51,7 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.ForgotPas
 
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.ForgotPasswordActivity;
-import edu.asu.garbosells.UserManagement.NewPassword;
+import edu.asu.garbosells.UserManagement.FirstLoginActivity;
 import edu.asu.garbosells.UserManagement.SettingsActivity;
 
 import java.util.Locale;
@@ -325,7 +325,7 @@ public class LaunchActivity extends AppCompatActivity {
     }
 
     private void firstTimeSignIn() {
-        Intent newPasswordActivity = new Intent(this, NewPassword.class);
+        Intent newPasswordActivity = new Intent(this, FirstLoginActivity.class);
         startActivityForResult(newPasswordActivity, 6);
     }
 

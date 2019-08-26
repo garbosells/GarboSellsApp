@@ -38,8 +38,8 @@ import android.widget.TextView;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.UserManagement.Adapters.FirstTimeLoginAttributesDisplayAdapter;
 
-public class NewPassword extends AppCompatActivity {
-    private String TAG = "NewPassword";
+public class FirstLoginActivity extends AppCompatActivity {
+    private String TAG = "FirstLoginActivity";
     private EditText newPassword;
 
     private Button continueSignIn;
@@ -49,7 +49,7 @@ public class NewPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_password);
+        setContentView(R.layout.activity_first_login);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_NewPassword);
@@ -143,7 +143,7 @@ public class NewPassword extends AppCompatActivity {
     private void showAttributeDetail(final String attributeType, final String attributeValue) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(attributeType);
-        final EditText input = new EditText(NewPassword.this);
+        final EditText input = new EditText(FirstLoginActivity.this);
         input.setText(attributeValue);
 
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(

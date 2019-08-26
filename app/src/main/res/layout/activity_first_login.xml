@@ -49,6 +49,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_new_password" />
+    <include layout="@layout/content_first_login" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -23,14 +23,14 @@
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:layout_marginTop="@dimen/activity_vertical_margin"
-    tools:context="com.amazonaws.youruserpools.NewPassword"
-    tools:showIn="@layout/activity_new_password">
+    tools:context="edu.asu.garbosells.UserManagement.FirstLoginActivity"
+    tools:showIn="@layout/activity_first_login">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Complete the following to continue"
+        android:text="Enter your name and new password to continue."
         android:textStyle="bold"
         android:id="@+id/newPassMessage"
         android:layout_alignParentStart="true" />
