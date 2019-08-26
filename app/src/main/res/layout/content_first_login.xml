@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Enter your name and new password to continue."
+        android:text="Enter a new password to continue."
         android:textStyle="bold"
         android:id="@+id/newPassMessage"
         android:layout_alignParentStart="true" />

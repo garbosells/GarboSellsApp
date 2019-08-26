@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import edu.asu.garbosells.UserManagement.UserClasses.User;
+
 public class AppHelper {
     private static final String TAG = "AppHelper";
     // App settings
@@ -68,32 +70,9 @@ public class AppHelper {
     private static Map<String, String> firstTimeLogInUpDatedAttributes;
     private static String firstTimeLoginNewPassword;
 
-    private static List<ItemToDisplay> mfaOptions;
-    private static List<String> mfaAllOptionsCode;
-
-    // Change the next three lines of code to run this demo on your user pool
-
-    /**
-     * Add your pool id here
-     */
-    private static final String userPoolId = "us-east-1_H08aLxBir";
-
-    /**
-     * Add you app id
-     */
-    private static final String clientId = "7aqj1ivcgkf6bnh52ucdv8cm3r";
-
-    /**
-     * App secret associated with your app id - if the App id does not have an associated App secret,
-     * set the App secret to null.
-     * e.g. clientSecret = null;
-     */
+    private static final String userPoolId = "us-east-1_IhOkKG7gm";
+    private static final String clientId = "i5f3f2pk5v2enqattt66jpg90";
     private static final String clientSecret = null;
-
-    /**
-     * Set Your User Pools region.
-     * e.g. if your user pools are in US East (N Virginia) then set cognitoRegion = Regions.US_EAST_1.
-     */
     private static final Regions cognitoRegion = Regions.US_EAST_1;
 
     // User details from the service
@@ -108,6 +87,8 @@ public class AppHelper {
     private static boolean emailAvailable;
 
     private static Set<String> currUserAttributes;
+
+    private static User currentGarboSellsUser;
 
     public static void init(Context context) {
         setData();
@@ -150,8 +131,6 @@ public class AppHelper {
         newDevice = null;
         thisDevice = null;
         thisDeviceTrustState = false;
-
-        mfaOptions = new ArrayList<ItemToDisplay>();
     }
 
     public static CognitoUserPool getPool() {
@@ -467,15 +446,6 @@ public class AppHelper {
                 itemCount++;
             }
         }
-    }
-
-    private static void modifyAttribute(String attributeName, String newValue) {
-        //
-
-    }
-
-    private static void deleteAttribute(String attributeName) {
-
     }
 }
 
