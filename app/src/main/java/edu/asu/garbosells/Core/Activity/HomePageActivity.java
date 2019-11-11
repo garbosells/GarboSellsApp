@@ -27,8 +27,7 @@ public class HomePageActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-
-        recyclerView.setAdapter(mAdapter);
         mAdapter = new ItemAdapter(this);
+        recyclerView.setAdapter(mAdapter);
     }
 }
