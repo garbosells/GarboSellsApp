@@ -11,6 +11,7 @@ import edu.asu.garbosells.Core.Adapter.ItemAdapter;
 import edu.asu.garbosells.R;
 
 public class HomePageActivity extends AppCompatActivity {
+    //Declare the recyclerview stuff
     public RecyclerView recyclerView;
     public RecyclerView.Adapter mAdapter;
     public RecyclerView.LayoutManager layoutManager;
@@ -21,12 +22,13 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         //RECYCLERVIEW
-        recyclerView =findViewById(R.id.recycler_view);
-        //recyclerView.setHasFixedSize(true);
+        recyclerView = (RecyclerView)findViewById(R.id.home_recycler_view);
+        //use linear layout manager
         layoutManager = new LinearLayoutManager(this);
-        //TODO: Fix
-        //recyclerView.setLayoutManager(layoutManager);
-        //mAdapter = new ItemAdapter(this);
-        //recyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+        recyclerView.setAdapter(mAdapter);
+        mAdapter = new ItemAdapter(this);
     }
 }

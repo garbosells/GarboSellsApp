@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <include
-            layout="@layout/current_device_state"
+            layout="@layout/content_recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
