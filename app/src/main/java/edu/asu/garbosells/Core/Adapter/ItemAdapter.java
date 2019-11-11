@@ -53,13 +53,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         //viewHolder.item_ld.setText(curr_item_LD);
         //viewHolder.item_sd.setText(curr_item_SD);
 
-            viewHolder.item_ld.setText("LD");
-            viewHolder.item_sd.setText("SD");
+            viewHolder.item_ld.setText("Long Description about the Item");
+            viewHolder.item_sd.setText("Item Title Here");
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 25;
     }
 
 
