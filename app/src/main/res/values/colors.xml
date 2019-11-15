@@ -17,4 +17,19 @@
     <color name="grey_500">#404142</color>
     <color name="grey_600">#303232</color>
     <color name="grey_700">#1D1E1E</color>
+
+    <!-- COLORS FROM ORIGINAL TEST VERSION OF APPLICATION -->
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="color_status_Unlisted">#7A7A7A</color>
+    <color name="color_status_Sold">#2CE735</color>
+    <color name="color_status_Posted">#3F51B5</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_black">#000000</color>
+
+    <!-- ADDITIONAL COLORS ADDED INTO OFFICIAL VERSION-->
+
+
+
 </resources>

@@ -52,4 +52,38 @@
         <item name="android:layout_centerHorizontal">true</item>
     </style>
 
+    <!-- STYLES FROM ORIGINAL TEST VERSION OF APPLICATION  -->
+    <style name="CustomFragmentLabel" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="CustomFragmentDynamicStyleLabel" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="CustomFragmentButton" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
+    <style name="CustomFragmentCircle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:background">@drawable/progress_circle</item>
+        <item name="android:height">24dp</item>
+        <item name="android:width">24dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="CustomFragmentBar" parent="TextAppearance.AppCompat">
+        <item name="android:width">2dp</item>
+        <item name="android:height">0dp</item>
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
+    <!-- ADDITIONAL STYLES ADDED INTO OFFICIAL VERSION-->
+
+
+
 </resources>
