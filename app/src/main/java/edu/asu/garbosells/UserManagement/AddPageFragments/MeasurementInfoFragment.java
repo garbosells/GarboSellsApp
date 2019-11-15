@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import edu.asu.garbosells.R;
+
 public class MeasurementInfoFragment extends Fragment {
     private View view; //used to call upon components in resource file (onCreateView)
     private Boolean minimized = false; //used to minimize/maximize fragments in CardView when user proceeds to next step
@@ -16,9 +18,10 @@ public class MeasurementInfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_measurement_info, container, false);
+        //return super.onCreateView(inflater, container, savedInstanceState);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
-
+        return view;
     }
 
     @Override
