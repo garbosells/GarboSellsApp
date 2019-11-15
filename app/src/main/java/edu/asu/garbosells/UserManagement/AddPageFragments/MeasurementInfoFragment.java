@@ -40,15 +40,6 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         button.setOnClickListener(this);
         //VIEW 'SELECTED/CLICKED' -> MAXIMIZE FRAGMENT
         view.setOnClickListener(this);
-
-        //TESTING DYNAMICISM OF FRAGMENTS
-        addDynamicFragment("DOUBLE", "TEST");
-        addDynamicFragment("DOUBLE", "TESTING");
-        addDynamicFragment("DOUBLE", "AGAIN");
-
-        addDynamicFragment("BOOLEAN", "TEST");
-        addDynamicFragment("BOOLEAN", "TESTING");
-        addDynamicFragment("BOOLEAN", "AGAIN");
         return view;
     }
 
@@ -60,12 +51,14 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
     @Override //View.OnClickListener interface
     public void onClick(View view) {
         switch(view.getId()) {
-            //button
+            //button continue
             case R.id.buttonContinue:
-            case R.id.fragment_measurement_info:
                 if(!minimized)
                     minimize();
-                else
+                break;
+            //entire fragment section (wiz creation step) selected
+            case R.id.fragment_measurement_info:
+                if(minimized)
                     maximize();
                 break;
             default:
@@ -77,7 +70,7 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
     private void addDynamicFragment(String type, String text) {
         label = text;
         DynamicFragmentContainer dynamicFragment;
-        //LOGIC THAT DISPLAYS TYPE OF EXPECTED USER INPUT
+        //-------------- LOGIC THAT DISPLAYS TYPE OF EXPECTED USER INPUT --------------
         switch(type) {
             case "DOUBLE":
                 dynamicFragment = new FragmentDouble();
@@ -117,9 +110,7 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
 
     private void minimize() {
         minimized = true;
-        //HIDE SPINNER
-
-        //HIDE NEW MEASUREMENT BUTTON
+        //HIDE BUTTONS
         view.findViewById(R.id.buttonNew).setVisibility(view.GONE);
         view.findViewById(R.id.buttonContinue).setVisibility(view.GONE);
 
@@ -147,14 +138,15 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         ft.commit();
     }
 
-    //--------------- SPINNER SET UP --------------------
+    //-------------- SPINNER SET UP --------------
 
     //Method utilizes AdapterView interface (OnItemSelectedListener)
     private void setupSpinner(Spinner spinner) {
-        //CREATE ARRAY LIST<STRING>                     <---- MAKE CALL TO DATABASE TO RETRIEVE ARRAY LIST<STRING>
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("temp");
-        list.add("test");
+        //CREATE ARRAY LIST<STRING>
+        ArrayList<String> list = new ArrayList<String>(); //<---- MAKE CALL TO DATABASE TO RETRIEVE ARRAY LIST<STRING>
+        list.add("HOODIE");
+        list.add("JACKET");
+        list.add("TSHIRT");
         //SET UP ADAPTER
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, list);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -163,8 +155,24 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         spinner.setOnItemSelectedListener(this);
     }
 
+    //-------------- SIMULATE CALL TO DATABASE FOR DYNAMIC LAYOUT --------------
     @Override //AdapterView.OnItemSelectedListener interface
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long row_id) {
+        //remove current fragments when spinner item is selected before adding in new dynamic fragments
+        removeCurrFragments();
+
+        //extract response for fragments to display
+        String[] layouts = null, labels = null;
+        //adapterView.getItemAtPosition(pos).toString()
+        layouts = getLayouts(adapterView.getItemAtPosition(pos).toString()).split(";");
+        labels = getLabels(adapterView.getItemAtPosition(pos).toString()).split(";");
+
+        if(layouts == null || labels == null)
+            return;
+
+        //add in dynamic fragments to display
+        for(int j = 0; j < layouts.length; j++)
+            addDynamicFragment(layouts[j], labels[j]);
 
     }
 
@@ -174,4 +182,28 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
     }
 
     //-------------- END SPINNER ----------------
+
+    //-------------- MOCK DATABASE CALLS - ENCAPSULATION --------------
+    private String getLayouts(String type) {
+            switch(type) {
+                case "HOODIE":
+                    return "BOOLEAN;DOUBLE;DOUBLE;";
+                case "JACKET":
+                    return "DOUBLE;BOOLEAN;BOOLEAN";
+                default:
+                    return "DOUBLE;BOOLEAN;DOUBLE;BOOLEAN;DOUBLE";
+            }
+    }
+
+    private String getLabels(String type) {
+            switch(type) {
+                case "HOODIE":
+                    return "Strings attached;Arm length;Chest length";
+                case "JACKET":
+                    return "Arm length;Zipper;Hoodie";
+                default:
+                    return "Dimension 1 length;Strings;Dimension 2 length;Zipper;Dimension 3 length";
+            }
+    }
+
 }
