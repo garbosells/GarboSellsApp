@@ -9,18 +9,19 @@ import java.util.ArrayList;
 public abstract class DynamicFragmentContainer extends Fragment {
 
     //Used to count fragments?
-    private static int requiredFragments = 1;
+//    private static int requiredFragments = 1;
     //Stores list of fragments added
     // - MAY BE REDUNDANT COMPARED TO UTILIZING FRAGMENT MANAGER
-    private static ArrayList<DynamicFragmentContainer> list = new ArrayList<DynamicFragmentContainer>();
+//    private static ArrayList<DynamicFragmentContainer> list = new ArrayList<DynamicFragmentContainer>();
     private static FragmentManager fragmentManager;
     private static FragmentTransaction fragmentTransaction;
 
+    /*
     protected static int count = 0;
     protected int localID;
     protected String label = "";
     protected boolean required = false;
-
+    */
     public DynamicFragmentContainer() {
 
     }
