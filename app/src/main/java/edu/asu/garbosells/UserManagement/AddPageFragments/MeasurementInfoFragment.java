@@ -18,8 +18,9 @@ public class MeasurementInfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         view = inflater.inflate(R.layout.fragment_measurement_info, container, false);
-        //return super.onCreateView(inflater, container, savedInstanceState);
+
 
         return view;
     }
