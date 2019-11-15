@@ -24,8 +24,10 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         private View view; //used to call upon components in resource file (onCreateView)
         private Boolean minimized = false; //used to minimize/maximize fragments in CardView when user proceeds to next step
         private static String label = ""; //label will be dynamically changed per item selected from Spinner
+        private static FragmentManager fragmentManager = null;
 
         public static String getText() { return label; }
+        public static FragmentManager getMeasurementInfoFragmentManager() { return fragmentManager; }
 
     @Nullable
     @Override //Fragment superclass
@@ -86,22 +88,24 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         if(dynamicFragment == null)
             return;
         //SET UP DYNAMIC ID: DYNAMICFRAGMENT
-
         //String tag = "dynamic: " + dynamicFragment.getLocalID();
-        FragmentManager fragmentManager = getChildFragmentManager();
+        fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.add_measurement_fragments, dynamicFragment);
         fragmentTransaction.commit();
+
+        //-------------- ISSUE TRYING TO CHANGE TEXT VIEW LABEL DYNAMICALLY --------------
+        //dynamicFragment.setLabel(label);
     }
 
     public void removeCurrFragments() {
-            FragmentManager fm = getChildFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            List<Fragment>fragments = fm.getFragments();
+            fragmentManager = getChildFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            List<Fragment>fragments = fragmentManager.getFragments();
             for(Fragment f: fragments){
-                ft.remove(f);
+                fragmentTransaction.remove(f);
             }
-            ft.commit();
+            fragmentTransaction.commit();
     }
 
     private void setupRequiredInputs(String response) {
@@ -114,13 +118,13 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         view.findViewById(R.id.buttonNew).setVisibility(view.GONE);
         view.findViewById(R.id.buttonContinue).setVisibility(view.GONE);
 
-        FragmentManager fm = getChildFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        List<Fragment> test = fm.getFragments();
+        fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        List<Fragment> test = fragmentManager.getFragments();
         for(Fragment f: test){
-            ft.hide(f);
+            fragmentTransaction.hide(f);
         }
-        ft.commit();
+        fragmentTransaction.commit();
     }
 
     private void maximize() {
@@ -129,13 +133,13 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         view.findViewById(R.id.buttonNew).setVisibility(view.VISIBLE);
         view.findViewById(R.id.buttonContinue).setVisibility(view.VISIBLE);
 
-        FragmentManager fm = getChildFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        List<Fragment> test = fm.getFragments();
+        fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        List<Fragment> test = fragmentManager.getFragments();
         for(Fragment f: test){
-            ft.show(f);
+            fragmentTransaction.show(f);
         }
-        ft.commit();
+        fragmentTransaction.commit();
     }
 
     //-------------- SPINNER SET UP --------------

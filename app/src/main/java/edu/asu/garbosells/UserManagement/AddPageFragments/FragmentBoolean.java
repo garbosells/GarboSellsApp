@@ -21,4 +21,6 @@ public class FragmentBoolean extends DynamicFragmentContainer {
 
         return inflater.inflate(R.layout.fragment_input_boolean, container, false);
     }
+
+
 }
