@@ -65,7 +65,6 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
                 break;
             default:
                 break;
-
         }
     }
 
@@ -74,11 +73,20 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         DynamicFragmentContainer dynamicFragment;
         //-------------- LOGIC THAT DISPLAYS TYPE OF EXPECTED USER INPUT --------------
         switch(type) {
+            case "BOOLEAN":
+                dynamicFragment = new FragmentBoolean();
+                break;
             case "DOUBLE":
                 dynamicFragment = new FragmentDouble();
                 break;
-            case "BOOLEAN":
-                dynamicFragment = new FragmentBoolean();
+            case "INTEGER":
+                dynamicFragment = new FragmentInteger();
+                break;
+            case "SPINNER":
+                dynamicFragment = new FragmentSpinner();
+                break;
+            case "STRING":
+                dynamicFragment = new FragmentString();
                 break;
             default:
                 dynamicFragment = null;
@@ -121,6 +129,7 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         List<Fragment> test = fragmentManager.getFragments();
+        //HIDE DYNAMIC FRAGMENTS
         for(Fragment f: test){
             fragmentTransaction.hide(f);
         }
@@ -130,12 +139,14 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
     private void maximize() {
         minimized = false;
 
+        //SHOW BUTTONS
         view.findViewById(R.id.buttonNew).setVisibility(view.VISIBLE);
         view.findViewById(R.id.buttonContinue).setVisibility(view.VISIBLE);
 
         fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         List<Fragment> test = fragmentManager.getFragments();
+        //SHOW DYNAMIC FRAGMENTS
         for(Fragment f: test){
             fragmentTransaction.show(f);
         }
@@ -155,7 +166,7 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, list);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-        //SET SPINNER ON CLICK LISTENER
+        //SET SPINNER ON ITEM SELECTED LISTENER
         spinner.setOnItemSelectedListener(this);
     }
 
@@ -188,7 +199,7 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
     //-------------- END SPINNER ----------------
 
     //-------------- MOCK DATABASE CALLS - ENCAPSULATION --------------
-    private String getLayouts(String type) {
+    public static String getLayouts(String type) {
             switch(type) {
                 case "HOODIE":
                     return "BOOLEAN;DOUBLE;DOUBLE;";
@@ -199,7 +210,7 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
             }
     }
 
-    private String getLabels(String type) {
+    public static String getLabels(String type) {
             switch(type) {
                 case "HOODIE":
                     return "Strings attached;Arm length;Chest length";
@@ -209,5 +220,5 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
                     return "Dimension 1 length;Strings;Dimension 2 length;Zipper;Dimension 3 length";
             }
     }
-
+    //-------------- END MOCK DATABASE RESPONSES --------------
 }

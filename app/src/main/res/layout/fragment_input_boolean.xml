@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/input_boolean"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -24,7 +23,7 @@
         app:layout_constraintVertical_bias="0.025"></TextView>
 
     <Switch
-        android:id="@+id/booleanSwitch"
+        android:id="@+id/input_boolean"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -40,7 +39,7 @@
     <LinearLayout
         android:id="@+id/boolean_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
 
         app:layout_constraintTop_toBottomOf="@+id/attribute"
