@@ -1,4 +1,4 @@
-package edu.asu.garbosells.Core.Provider.Template;
+package edu.asu.garbosells.Template;
 
 /**
  * Represents a measurement that should be taken of an item in a given subcategory.

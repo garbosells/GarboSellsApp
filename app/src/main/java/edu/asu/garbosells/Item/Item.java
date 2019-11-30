@@ -1,4 +1,4 @@
-package edu.asu.garbosells.Core.Provider.Item;
+package edu.asu.garbosells.Item;
 
 
 import java.util.ArrayList;

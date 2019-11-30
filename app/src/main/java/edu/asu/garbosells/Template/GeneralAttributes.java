@@ -1,4 +1,4 @@
-package edu.asu.garbosells.Core.Provider.Template;
+package edu.asu.garbosells.Template;
 
 /**
  * A set of Attributes that applies to all items.

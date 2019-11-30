@@ -1,7 +1,5 @@
-package edu.asu.garbosells.Core.Provider.Template;
+package edu.asu.garbosells.Template;
 
-
-import java.util.List;
 
 /**
  * Represents a Size option. Indicates the "Size Type" (US Letter, US Numeric, UK, One-Size, etc) as well as a set of possible values.

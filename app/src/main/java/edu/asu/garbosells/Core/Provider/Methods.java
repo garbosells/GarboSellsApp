@@ -2,11 +2,9 @@ package edu.asu.garbosells.Core.Provider;
 
 import java.util.List;
 
-import edu.asu.garbosells.Core.Provider.Template.Category;
-import edu.asu.garbosells.Core.Provider.Template.Subcategory;
-import edu.asu.garbosells.Core.Provider.Template.Template;
-
-import static java.sql.Types.NULL;
+import edu.asu.garbosells.Template.Category;
+import edu.asu.garbosells.Template.Subcategory;
+import edu.asu.garbosells.Template.Template;
 
 public class Methods {
     public List<Category> GetCategories(){

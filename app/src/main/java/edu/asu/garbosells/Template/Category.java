@@ -1,4 +1,4 @@
-package edu.asu.garbosells.Core.Provider.Template;
+package edu.asu.garbosells.Template;
 
 /**
  * Represents the broad category that the item belongs to.

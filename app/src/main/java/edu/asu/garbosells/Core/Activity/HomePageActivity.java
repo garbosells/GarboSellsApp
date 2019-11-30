@@ -22,7 +22,7 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         //RECYCLERVIEW
-        recyclerView = (RecyclerView)findViewById(R.id.home_recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.home_recycler_view);
         //use linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

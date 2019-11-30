@@ -1,8 +1,5 @@
-package edu.asu.garbosells.Core.Provider.Item;
+package edu.asu.garbosells.Item;
 
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A special set of attributes that generally apply to all/most items.

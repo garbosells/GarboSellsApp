@@ -1,4 +1,4 @@
-package edu.asu.garbosells.Core.Provider.Item;
+package edu.asu.garbosells.Item;
 
 public class Listing {
     public Item inventoryItem;

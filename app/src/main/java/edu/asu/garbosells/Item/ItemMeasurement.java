@@ -1,4 +1,4 @@
-package edu.asu.garbosells.Core.Provider.Item;
+package edu.asu.garbosells.Item;
 
 /**
  * Represents a measurement of an item. The area that is to be measured is provided by the template loaded from the CategoryDataService and is identifiable by the ID provided in the template.

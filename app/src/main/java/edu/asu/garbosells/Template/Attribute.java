@@ -1,7 +1,5 @@
-package edu.asu.garbosells.Core.Provider.Template;
+package edu.asu.garbosells.Template;
 
-
-import java.util.List;
 
 /**
  * Represents a general or subcategory-specific Attribute.

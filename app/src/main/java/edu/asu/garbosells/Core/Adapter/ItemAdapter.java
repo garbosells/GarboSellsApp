@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import edu.asu.garbosells.Core.Provider.Item.Item;
+import edu.asu.garbosells.Item.Item;
 import edu.asu.garbosells.Core.Provider.ItemInjector;
 import edu.asu.garbosells.R;
 

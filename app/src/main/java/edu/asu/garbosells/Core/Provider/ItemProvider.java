@@ -1,8 +1,8 @@
 package edu.asu.garbosells.Core.Provider;
 import java.util.ArrayList;
 
-import edu.asu.garbosells.Core.Provider.Item.Item;
-import edu.asu.garbosells.Core.Provider.Item.GeneralItemAttributes;
+import edu.asu.garbosells.Item.Item;
+import edu.asu.garbosells.Item.GeneralItemAttributes;
 
 public class ItemProvider implements IItemDataProvider {
     ArrayList<Item> temp_items;
