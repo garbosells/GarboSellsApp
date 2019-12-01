@@ -5,22 +5,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Core.Activity.HomePageActivity">
+    tools:context=".Core.Activity.ListActivity"
+    android:id="@+id/list_drawer_layout">
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Add the ActionBar -->
         <include
-            layout="@layout/content_recycler_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            layout="@layout/main_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="?android:actionBarSize">
+
+            <!-- Set the Main content -->
+            <include
+                layout="@layout/content_recycler_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_toolbar"/>
+        </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -30,11 +40,11 @@
             android:layout_marginBottom="24dp"
             android:clickable="true"
             app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             app:srcCompat="@drawable/ic_add_black_24dp" />
-    </android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -43,7 +53,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         android:background="@color/toolbar_items"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_launch_drawer" />
+        app:headerLayout="@layout/nav_header_user"
+        app:menu="@menu/activity_list_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

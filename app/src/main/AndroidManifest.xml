@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Core.Activity.HomePageActivity"></activity>
+        <activity android:name=".Core.Activity.ListActivity"></activity>
         <activity android:name=".Core.Activity.AddItemActivity"></activity>
         <activity
             android:name=".LaunchActivity"
