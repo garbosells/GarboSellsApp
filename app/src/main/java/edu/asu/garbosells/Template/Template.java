@@ -1,6 +1,7 @@
 package edu.asu.garbosells.Template;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,4 +28,15 @@ public class Template {
      * List of Measurements that should be taken based on the given subcategory.
      */
     public List<Measurement> measurements;
+
+    public Template() {
+        sizeOptions = new ArrayList<Size>();
+        measurements = new ArrayList<Measurement>();
+    }
+
+    @Override
+    public String toString() {
+        return "Category: " + category +
+                "\nSubcategory: " + subcategory;
+    }
 }

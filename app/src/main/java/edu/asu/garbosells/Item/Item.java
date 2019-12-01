@@ -178,4 +178,116 @@ public class Item {
                 System.out.println(a.attributeRecommendationId == null ? a.itemAttributeValue : a.attributeRecommendationId);
             });*/
     }
+
+    public Date getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(Date createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public Date getUpdatedDateTime() {
+        return updatedDateTime;
+    }
+
+    public void setUpdatedDateTime(Date updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
+    }
+
+    public long getCreatedByUserId() {
+        return createdByUserId;
+    }
+
+    public void setCreatedByUserId(long createdByUserId) {
+        this.createdByUserId = createdByUserId;
+    }
+
+    public long getUpdatedByUserId() {
+        return updatedByUserId;
+    }
+
+    public void setUpdatedByUserId(long updatedByUserId) {
+        this.updatedByUserId = updatedByUserId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public long getSubcategoryId() {
+        return subcategoryId;
+    }
+
+    public void setSubcategoryId(long subcategoryId) {
+        this.subcategoryId = subcategoryId;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
+    }
+
+    public List<ItemMeasurement> getMeasurements() {
+        return measurements;
+    }
+
+    public void setMeasurements(List<ItemMeasurement> measurements) {
+        this.measurements = measurements;
+    }
+
+    public ItemSize getSize() {
+        return size;
+    }
+
+    public void setSize(ItemSize size) {
+        this.size = size;
+    }
+
+    public GeneralItemAttributes getGeneralItemAttributes() {
+        return generalItemAttributes;
+    }
+
+    public void setGeneralItemAttributes(GeneralItemAttributes generalItemAttributes) {
+        this.generalItemAttributes = generalItemAttributes;
+    }
+
+    public List<ItemAttribute> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(List<ItemAttribute> attributes) {
+        this.attributes = attributes;
+    }
 }

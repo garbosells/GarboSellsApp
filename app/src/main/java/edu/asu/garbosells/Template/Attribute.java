@@ -1,6 +1,8 @@
 package edu.asu.garbosells.Template;
 
 
+import java.util.ArrayList;
+
 /**
  * Represents a general or subcategory-specific Attribute.
  */
@@ -41,5 +43,5 @@ public class Attribute {
     /**
      * The list of value recommendations. If <code>uiInputId == 0</code>, then the spinner should be populated with these recommendations for the user to select.
      */
-    //public List<Recommendation> recommendations;
+    public ArrayList<Recommendation> recommendations;
 }

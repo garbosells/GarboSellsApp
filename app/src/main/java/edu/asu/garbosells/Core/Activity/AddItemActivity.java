@@ -14,7 +14,12 @@ import android.widget.TextView;
 
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 
+import java.util.List;
+
+import edu.asu.garbosells.API.Providers.TemplateProvider;
+import edu.asu.garbosells.API.TemplateAPI;
 import edu.asu.garbosells.R;
+import edu.asu.garbosells.Template.Template;
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.SettingsActivity;
 
@@ -52,6 +57,8 @@ public class AddItemActivity extends AppCompatActivity {
         View navigationHeader = nDrawer.getHeaderView(0);
         TextView navHeaderSubTitle = (TextView) navigationHeader.findViewById(R.id.textViewNavUserSub);
         navHeaderSubTitle.setText(username);
+
+        Template template = new TemplateAPI().GetTemplateBySubcategoryId(0);
     }
 
     // Handle when the a navigation item is selected

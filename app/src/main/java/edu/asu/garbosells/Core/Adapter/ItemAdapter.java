@@ -1,7 +1,6 @@
 package edu.asu.garbosells.Core.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,15 +12,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.asu.garbosells.Item.Item;
-import edu.asu.garbosells.Core.Provider.ItemInjector;
+import edu.asu.garbosells.API.ListingAPI;
 import edu.asu.garbosells.R;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     Context mcontext;
 
-    ItemInjector itemInjector = new ItemInjector();
-    ArrayList<Item> items = itemInjector.getAllItems();
+    ListingAPI listingAPI = new ListingAPI();
+    ArrayList<Item> items = listingAPI.getAllItems();
     int[] images;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
