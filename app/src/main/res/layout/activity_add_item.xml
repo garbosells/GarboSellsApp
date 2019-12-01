@@ -21,7 +21,8 @@ tools:openDrawer="start">
         android:layout_height="match_parent"/>
 
     <!-- Set the Main content -->
-    <include layout="@layout/content_add_item_activity" />
+    <include layout="@layout/content_add_item_activity"
+        android:paddingTop="?android:actionBarSize"/>
 </RelativeLayout>
 
 <android.support.design.widget.NavigationView
