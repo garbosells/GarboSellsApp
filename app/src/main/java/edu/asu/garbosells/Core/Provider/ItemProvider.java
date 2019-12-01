@@ -58,10 +58,6 @@ public class ItemProvider implements IItemDataProvider {
         tshirt3.longDescription = "Unisex t-shirts are a lie. They're really men's t-shirts.";
         temp_items.add(tshirt3);
 
-        temp_items.add(hat2);
-        temp_items.add(tshirt1);
-        temp_items.add(tshirt2);
-
 
         return temp_items;
     }

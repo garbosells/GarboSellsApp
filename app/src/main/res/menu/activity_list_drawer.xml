@@ -10,6 +10,14 @@
     </group>
 
     <group
+        android:id="@+id/group_settings"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item_settings"
+            android:title="Settings" />
+    </group>
+
+    <group
         android:id="@+id/group_user_signout"
         android:checkableBehavior="single">
         <item

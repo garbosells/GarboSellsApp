@@ -51,7 +51,7 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GetDetail
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.UpdateAttributesHandler;
 
 import edu.asu.garbosells.Core.Activity.AddItemActivity;
-import edu.asu.garbosells.Core.Activity.HomePageActivity;
+import edu.asu.garbosells.Core.Activity.ListActivity;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.UserManagement.Adapters.UserAttributesAdapter;
 
@@ -203,10 +203,10 @@ public class SettingsActivity extends AppCompatActivity {
         // Find which item was selected
         switch(item.getItemId()) {
             case R.id.nav_item_add_item:
-                goToAddItemAddItemActivity();
+                goToAddItemActivity();
                 break;
             case R.id.nav_item_view_list:
-                goToHomeActivity();
+                goToListActivity();
                 break;
             case R.id.nav_user_sign_out:
                 // Sign out from this account
@@ -215,13 +215,13 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    private void goToAddItemAddItemActivity() {
+    private void goToAddItemActivity() {
         Intent intent = new Intent(this, AddItemActivity.class);
         startActivity(intent);
     }
 
-    private void goToHomeActivity() {
-        Intent intent = new Intent(this, HomePageActivity.class);
+    private void goToListActivity() {
+        Intent intent = new Intent(this, ListActivity.class);
         startActivity(intent);
     }
 
