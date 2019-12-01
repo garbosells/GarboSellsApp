@@ -1,13 +1,10 @@
-package edu.asu.garbosells.UserManagement.AddPageFragments;
+package edu.asu.garbosells.Core.AddPageFragments;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-
-import edu.asu.garbosells.R;
 
 public abstract class DynamicFragmentContainer extends Fragment {
 

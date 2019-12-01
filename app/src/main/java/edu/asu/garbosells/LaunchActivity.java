@@ -49,7 +49,6 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.Choo
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.AuthenticationHandler;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.ForgotPasswordHandler;
 
-import edu.asu.garbosells.UserManagement.AddItemActivity;
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.ForgotPasswordActivity;
 import edu.asu.garbosells.UserManagement.FirstLoginActivity;
@@ -362,7 +361,7 @@ public class LaunchActivity extends AppCompatActivity {
     }
 
     private void launchUser() {
-        Intent userActivity = new Intent(this, AddItemActivity.class);
+        Intent userActivity = new Intent(this, SettingsActivity.class);
         userActivity.putExtra("name", username);
         startActivityForResult(userActivity, 4);
     }

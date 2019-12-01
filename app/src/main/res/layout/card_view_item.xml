@@ -18,8 +18,8 @@
             android:padding="10dp"
             >
 
-            <LinearLayout
-                android:id="@+id/item_image_placeholder"
+            <ImageView
+                android:id="@+id/imageview_item_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:orientation="vertical"
@@ -28,8 +28,10 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@color/grey_300"
+                android:src="@drawable/image_subcategory5"
+                android:scaleType="centerCrop"
                 >
-            </LinearLayout>
+            </ImageView>
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline"
@@ -49,7 +51,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:id="@+id/textview_item_sd"
+                    android:id="@+id/textview_item_short_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -62,12 +64,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textview_item_ld"
+                    android:id="@+id/textview_item_long_description"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="This is the long description of the item  wow it's kind of long for sure totally waoooooow takes up so much space doot doot dooooooooooototally waoooooow takes up so much space doot doot dooooooooooo totally waoooooow takes up so much space doot doot dooooooooooo "
                     android:gravity="center_vertical"
-                    android:layout_below="@+id/textview_item_sd"
+                    android:layout_below="@+id/textview_item_short_description"
                     />
 
             </RelativeLayout>

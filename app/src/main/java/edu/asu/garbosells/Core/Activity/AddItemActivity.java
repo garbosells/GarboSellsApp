@@ -1,4 +1,4 @@
-package edu.asu.garbosells.UserManagement;
+package edu.asu.garbosells.Core.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

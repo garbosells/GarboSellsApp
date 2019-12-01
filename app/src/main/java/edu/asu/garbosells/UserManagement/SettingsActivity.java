@@ -50,6 +50,8 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GenericHa
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GetDetailsHandler;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.UpdateAttributesHandler;
 
+import edu.asu.garbosells.Core.Activity.AddItemActivity;
+import edu.asu.garbosells.Core.Activity.HomePageActivity;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.UserManagement.Adapters.UserAttributesAdapter;
 
@@ -200,11 +202,27 @@ public class SettingsActivity extends AppCompatActivity {
 
         // Find which item was selected
         switch(item.getItemId()) {
+            case R.id.nav_item_add_item:
+                goToAddItemAddItemActivity();
+                break;
+            case R.id.nav_item_view_list:
+                goToHomeActivity();
+                break;
             case R.id.nav_user_sign_out:
                 // Sign out from this account
                 signOut();
                 break;
         }
+    }
+
+    private void goToAddItemAddItemActivity() {
+        Intent intent = new Intent(this, AddItemActivity.class);
+        startActivity(intent);
+    }
+
+    private void goToHomeActivity() {
+        Intent intent = new Intent(this, HomePageActivity.class);
+        startActivity(intent);
     }
 
     // Get user details from CIP service

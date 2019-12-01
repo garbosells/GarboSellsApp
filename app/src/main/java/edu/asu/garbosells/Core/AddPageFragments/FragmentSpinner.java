@@ -1,4 +1,4 @@
-package edu.asu.garbosells.UserManagement.AddPageFragments;
+package edu.asu.garbosells.Core.AddPageFragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import edu.asu.garbosells.R;
 
-public class FragmentDouble extends DynamicFragmentContainer {
-    public FragmentDouble() {
+public class FragmentSpinner extends DynamicFragmentContainer {
+    public FragmentSpinner() {
         super();
     }
 
@@ -18,6 +18,6 @@ public class FragmentDouble extends DynamicFragmentContainer {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_input_double, container, false);
+        return inflater.inflate(R.layout.fragment_input_spinner, container, false);
     }
 }

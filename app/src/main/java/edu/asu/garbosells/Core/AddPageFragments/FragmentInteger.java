@@ -1,4 +1,4 @@
-package edu.asu.garbosells.UserManagement.AddPageFragments;
+package edu.asu.garbosells.Core.AddPageFragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
