@@ -2,6 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group
+        android:id="@+id/group_item_add_item"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item_add_item"
+            android:title="New Listing" />
+    </group>
+
+    <group
+        android:id="@+id/group_item_view_list"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item_view_list"
+            android:title="Listings" />
+    </group>
+
+    <group
         android:id="@+id/group_user_signout"
         android:checkableBehavior="single">
         <item

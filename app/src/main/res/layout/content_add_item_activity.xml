@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="60dp"
-    tools:context="edu.asu.garbosells.UserManagement.AddItemActivity">
+    tools:context="edu.asu.garbosells.Core.Activity.AddItemActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:id="@+id/fragment_measurement_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:name="edu.asu.garbosells.UserManagement.AddPageFragments.MeasurementInfoFragment"/>
+            android:name="edu.asu.garbosells.Core.AddPageFragments.MeasurementInfoFragment"/>
 
 
 
