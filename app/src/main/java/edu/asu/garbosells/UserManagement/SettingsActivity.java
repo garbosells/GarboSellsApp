@@ -50,7 +50,7 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GenericHa
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GetDetailsHandler;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.UpdateAttributesHandler;
 
-import edu.asu.garbosells.Core.Activity.AddItemActivity;
+import edu.asu.garbosells.Core.Activity.AddItem.AddItemActivity;
 import edu.asu.garbosells.Core.Activity.ListActivity;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.UserManagement.Adapters.UserAttributesAdapter;

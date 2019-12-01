@@ -1,10 +1,10 @@
-package edu.asu.garbosells.Core.Provider;
+package edu.asu.garbosells.API.Providers.Mocks;
 import java.util.ArrayList;
 
+import edu.asu.garbosells.API.Interfaces.IItemAPI;
 import edu.asu.garbosells.Item.Item;
-import edu.asu.garbosells.Item.GeneralItemAttributes;
 
-public class ItemProvider implements IItemDataProvider {
+public class MockListingProvider implements IItemAPI {
     ArrayList<Item> temp_items;
 
     public ArrayList<Item> getMockItems(){

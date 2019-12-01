@@ -1,9 +1,9 @@
-package edu.asu.garbosells.Core.Provider;
+package edu.asu.garbosells.API.Interfaces;
 
 import java.util.ArrayList;
 
 import edu.asu.garbosells.Item.Item;
 
-public interface IItemDataProvider {
+public interface IItemAPI {
     ArrayList<Item> getAllItems();
 }
