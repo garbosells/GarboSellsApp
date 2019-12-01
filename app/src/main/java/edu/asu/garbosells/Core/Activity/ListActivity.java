@@ -2,6 +2,7 @@ package edu.asu.garbosells.Core.Activity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -32,6 +33,7 @@ public class ListActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private String username;
     private CognitoUser user;
+    private FloatingActionButton addItemButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,9 @@ public class ListActivity extends AppCompatActivity {
 
         mAdapter = new ItemAdapter(this);
         recyclerView.setAdapter(mAdapter);
+
+        addItemButton = findViewById(R.id.add_item_button);
+        addItemButton.setOnClickListener(view -> goToAddItemActivity());
     }
 
     // Handle when the a navigation item is selected
