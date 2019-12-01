@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 
-import edu.asu.garbosells.Core.Activity.AddItem.AddItemActivity;
+import edu.asu.garbosells.Core.Activity.AddItemActivity;
 import edu.asu.garbosells.Core.Adapter.ItemAdapter;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.UserManagement.AppHelper;

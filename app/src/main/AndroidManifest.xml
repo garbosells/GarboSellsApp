@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Core.Activity.ListActivity"></activity>
-        <activity android:name=".Core.Activity.AddItem.AddItemActivity"></activity>
+        <activity android:name=".Core.Activity.AddItemActivity"></activity>
         <activity
             android:name=".LaunchActivity"
             android:theme="@style/AppTheme.NoActionBar">
