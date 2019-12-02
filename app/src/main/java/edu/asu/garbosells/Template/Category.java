@@ -3,15 +3,7 @@ package edu.asu.garbosells.Template;
 /**
  * Represents the broad category that the item belongs to.
  */
-public class Category {
-    /**
-     * Uniquely identifies the Category (primary key in the categroy database).
-     */
-    public long id;
-    /**
-     * The description of the Category to be displayed to the user.
-     */
-    public String description;
+public class Category extends ICategory {
     /**
      * Indicates whether sizing applies to this Category. Can be used to determine whether to show the Size input component.
      */

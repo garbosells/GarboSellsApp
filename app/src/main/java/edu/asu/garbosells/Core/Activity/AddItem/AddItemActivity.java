@@ -1,7 +1,8 @@
-package edu.asu.garbosells.Core.Activity;
+package edu.asu.garbosells.Core.Activity.AddItem;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,16 +15,14 @@ import android.widget.TextView;
 
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 
-import java.util.List;
-
-import edu.asu.garbosells.API.Providers.TemplateProvider;
 import edu.asu.garbosells.API.TemplateAPI;
+import edu.asu.garbosells.Core.Activity.ListActivity;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.Template.Template;
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.SettingsActivity;
 
-public class AddItemActivity extends AppCompatActivity {
+public class AddItemActivity extends AppCompatActivity implements CategorySubcategorySelectFragment.OnFragmentInteractionListener {
 
     private NavigationView nDrawer;
     private DrawerLayout mDrawer;
@@ -42,7 +41,7 @@ public class AddItemActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         toolbar.setTitle("");
         TextView main_title = (TextView) findViewById(R.id.main_toolbar_title);
-        main_title.setText("Listings");
+        main_title.setText("New Listing");
         setSupportActionBar(toolbar);
 
         // Set navigation drawer for this screen
@@ -130,5 +129,10 @@ public class AddItemActivity extends AppCompatActivity {
         intent.putExtra("name",username);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

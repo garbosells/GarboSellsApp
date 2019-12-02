@@ -5,15 +5,7 @@ import java.util.List;
 /**
  * Represents the Subcategory of the Item. More specific than Category.
  */
-public class Subcategory {
-    /**
-     * Uniquely identifies the Subcategory.
-     */
-    public long id;
-    /**
-     * Description of the Subcategory to display to the user.
-     */
-    public String description;
+public class Subcategory extends ICategory {
     /**
      * The parent Category of this Subcategory.
      */

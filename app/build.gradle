@@ -52,3 +52,7 @@ dependencies {
     implementation 'com.google.okhttp:okhttp:20120626'
     implementation 'com.google.code.gson:gson:2.8.6'
 }
+
+dependencies {
+    implementation 'com.android.support:support-v4:28.+'
+}

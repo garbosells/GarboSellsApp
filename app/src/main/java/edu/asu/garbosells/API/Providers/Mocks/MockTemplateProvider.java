@@ -65,8 +65,14 @@ public class MockTemplateProvider implements ITemplateAPI {
 
         Subcategory tshirt = new Subcategory();
         tshirt.id = 0;
-        tshirt.description = "Tee";
+        tshirt.description = "Men's Tee";
         tshirt.category=shirt;
+        tshirt.attributes= Arrays.asList(new Attribute[] {tshirtAttribute});
+
+        Subcategory tshirt2 = new Subcategory();
+        tshirt2.id=3;
+        tshirt2.description="Unisex tee";
+        tshirt2.category=shirt;
         tshirt.attributes= Arrays.asList(new Attribute[] {tshirtAttribute});
 
         Subcategory truckerHat = new Subcategory();
@@ -75,7 +81,12 @@ public class MockTemplateProvider implements ITemplateAPI {
         truckerHat.category=hat;
         truckerHat.attributes= Arrays.asList(new Attribute[] {hatAttribute});
 
-        Subcategory[] subcategoryArray = new Subcategory[] {tshirt, truckerHat};
+        Subcategory beanie = new Subcategory();
+        beanie.id = 2;
+        beanie.description="Beanie";
+        beanie.category = hat;
+
+        Subcategory[] subcategoryArray = new Subcategory[] {tshirt, tshirt2, truckerHat, beanie};
         subcategories = new ArrayList<>();
         subcategories.addAll(Arrays.asList(subcategoryArray));
 
