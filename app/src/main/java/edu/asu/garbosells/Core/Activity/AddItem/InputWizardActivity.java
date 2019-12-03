@@ -55,7 +55,7 @@ public class InputWizardActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         toolbar.setTitle("");
         TextView main_title = (TextView) findViewById(R.id.main_toolbar_title);
-        main_title.setText("New Listing");
+        main_title.setText("New Listing: " + subcategory.description);
         setSupportActionBar(toolbar);
 
         // Set navigation drawer for this screen
