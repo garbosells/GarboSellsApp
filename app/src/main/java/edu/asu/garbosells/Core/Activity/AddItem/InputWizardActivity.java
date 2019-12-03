@@ -13,9 +13,17 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
+import edu.asu.garbosells.API.Providers.TemplateProvider;
 import edu.asu.garbosells.Core.Activity.ListActivity;
 import edu.asu.garbosells.R;
+import edu.asu.garbosells.Template.Subcategory;
+import edu.asu.garbosells.Template.Template;
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.SettingsActivity;
 
@@ -27,10 +35,19 @@ public class InputWizardActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private String username;
     private CognitoUser user;
+    private Subcategory subcategory;
+    private Template template;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        String json = intent.getStringExtra("subcategory");
+        Type SubcategoryType = new TypeToken<Subcategory>(){}.getType();
+        subcategory = new Gson().fromJson(json, SubcategoryType);
+
+        template = new TemplateProvider().GetTemplateBySubcategoryId(subcategory.id);
+
         setContentView(R.layout.activity_input_wizard);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
