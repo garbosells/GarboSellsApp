@@ -149,6 +149,7 @@ public class CategorySubcategorySelectFragment extends Fragment implements Adapt
 
         if(selection.getClass() == Subcategory.class) {
             selectedSubcategory = (Subcategory) selection;
+            selectedSubcategory.category = selectedCategory;
         }
     }
 

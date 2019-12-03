@@ -13,7 +13,14 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/fragment_description"/>
+            android:id="@+id/input_description_layout"
+            layout="@layout/input_description"
+            android:visibility="visible"
+            />
+        <include
+            android:id="@+id/input_size_layout"
+            layout="@layout/input_size"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

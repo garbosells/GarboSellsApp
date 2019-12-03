@@ -1,6 +1,8 @@
 package edu.asu.garbosells.Template;
 
 
+import java.util.List;
+
 /**
  * Represents a Size option. Indicates the "Size Type" (US Letter, US Numeric, UK, One-Size, etc) as well as a set of possible values.
  * The user should not be able to enter a custom value.
@@ -27,5 +29,10 @@ public class Size {
     /**
      * List of recommended values. The user can only select a value from this list.
      */
-    //public List<Recommendation> recommendations;
+    public List<Recommendation> recommendations;
+
+    @Override
+    public String toString() {
+        return sizeTypeDescription;
+    }
 }

@@ -18,4 +18,9 @@ public class Recommendation {
         this.id =id;
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return description;
+    }
 }

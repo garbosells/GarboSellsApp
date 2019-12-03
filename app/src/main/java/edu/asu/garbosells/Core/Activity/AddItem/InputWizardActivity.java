@@ -97,6 +97,8 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         navHeaderSubTitle.setText(username);
 
         item = new Item();
+        item.categoryId = subcategory.category.id;
+        item.subcategoryId = subcategory.id;
         setupInputForm();
     }
 
