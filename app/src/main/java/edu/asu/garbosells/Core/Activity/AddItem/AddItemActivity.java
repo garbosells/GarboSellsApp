@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +24,7 @@ import edu.asu.garbosells.Template.Template;
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.SettingsActivity;
 
-public class AddItemActivity extends AppCompatActivity implements CategorySubcategorySelectFragment.OnFragmentInteractionListener {
+public class AddItemActivity extends AppCompatActivity implements CategorySubcategorySelectFragment.OnCategorySubcategorySelectFragmentInteractionListener {
 
     private NavigationView nDrawer;
     private DrawerLayout mDrawer;
@@ -30,6 +32,9 @@ public class AddItemActivity extends AppCompatActivity implements CategorySubcat
     private ActionBarDrawerToggle mDrawerToggle;
     private String username;
     private CognitoUser user;
+    private Template template;
+    private long selectedSubcategoryId;
+    private String selectedSubcategoryDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +61,6 @@ public class AddItemActivity extends AppCompatActivity implements CategorySubcat
         View navigationHeader = nDrawer.getHeaderView(0);
         TextView navHeaderSubTitle = (TextView) navigationHeader.findViewById(R.id.textViewNavUserSub);
         navHeaderSubTitle.setText(username);
-
-        Template template = new TemplateAPI().GetTemplateBySubcategoryId(0);
     }
 
     // Handle when the a navigation item is selected
@@ -132,7 +135,11 @@ public class AddItemActivity extends AppCompatActivity implements CategorySubcat
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onSelectSubcategory(long subcategoryId, String subcategoryDescription) {
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+       Fragment fragment = supportFragmentManager.findFragmentById(R.id.fragment_category_subcategory_select);
+        FragmentManager fragmentManager = fragment.getFragmentManager();
+       fragmentManager.beginTransaction().remove(fragment).commitNow();
+       supportFragmentManager.popBackStackImmediate();
     }
 }

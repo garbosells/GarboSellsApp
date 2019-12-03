@@ -1,10 +1,14 @@
 package edu.asu.garbosells.API.Remote;
 
+import android.os.AsyncTask;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import edu.asu.garbosells.API.Interfaces.ITemplateAPI;
 import edu.asu.garbosells.Template.Category;
@@ -19,7 +23,44 @@ public class RemoteTemplateAPI implements ITemplateAPI {
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
 
+    public class GetCategoriesTask extends AsyncTask<String, Void, List<Category>> {
+
+        @Override
+        protected List<Category> doInBackground(String... strings) {
+            return GetCategoriesAsync();
+        }
+    }
+
+    public class GetSubcategoriesTask extends AsyncTask<Long, Void, List<Subcategory>> {
+        @Override
+        protected List<Subcategory> doInBackground(Long... longs) {
+            return GetSubcategoriesByCategoryIdAsync(longs[0]);
+        }
+    }
+
     public List<Category> GetCategories() {
+        try {
+            return new GetCategoriesTask().execute("go").get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Subcategory> GetSubcategoriesByCategoryId(long categoryId) {
+        try {
+            return new GetSubcategoriesTask().execute(categoryId).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    private List<Category> GetCategoriesAsync() {
         OkHttpClient client = new OkHttpClient();
         String url = "https://categorydataservice.azurewebsites.net/api/Category/GetAllCategories";
         Request request = new Request.Builder()
@@ -33,11 +74,11 @@ public class RemoteTemplateAPI implements ITemplateAPI {
             return categories;
         } catch (Exception ex) {
             System.out.println("Unable to complete operation, error: " + ex.toString());
-            return null;
+            return new ArrayList<>();
         }
     }
 
-    public List<Subcategory> GetSubcategoriesByCategoryId(long categoryId) {
+    private List<Subcategory> GetSubcategoriesByCategoryIdAsync(long categoryId) {
         OkHttpClient client = new OkHttpClient();
         String url = String.format("https://categorydataservice.azurewebsites.net/api/Category/GetSubcategoriesByCategoryId?categoryId=%d", categoryId);
         Request request = new Request.Builder()
@@ -51,7 +92,7 @@ public class RemoteTemplateAPI implements ITemplateAPI {
             return subcategories;
         } catch (Exception ex) {
             System.out.println("Unable to complete operation, error: " + ex.toString());
-            return null;
+            return new ArrayList<>();
         }
     }
 

@@ -3,13 +3,13 @@ package edu.asu.garbosells.API;
 import java.util.List;
 
 import edu.asu.garbosells.API.Interfaces.ITemplateAPI;
-import edu.asu.garbosells.API.Providers.Mocks.MockTemplateProvider;
+import edu.asu.garbosells.API.Providers.TemplateProvider;
 import edu.asu.garbosells.Template.Category;
 import edu.asu.garbosells.Template.Subcategory;
 import edu.asu.garbosells.Template.Template;
 
 public class TemplateAPI implements ITemplateAPI {
-    private ITemplateAPI templateProvider = new MockTemplateProvider();
+    private ITemplateAPI templateProvider = new TemplateProvider();
 
     @Override
     public List<Category> GetCategories() {

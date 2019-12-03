@@ -68,6 +68,20 @@
 
             </Spinner>
         </LinearLayout>
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+            <Button
+                android:id="@+id/button_choose_subcategory"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:text="Create"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:background="@color/colorAccent"
+                android:padding="10dp"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

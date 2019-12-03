@@ -10,8 +10,8 @@ import edu.asu.garbosells.Template.Subcategory;
 import edu.asu.garbosells.Template.Template;
 
 public class TemplateProvider implements ITemplateAPI {
-    private ITemplateAPI api = new MockTemplateProvider(); //new RemoteTemplateAPI();
-
+    //private ITemplateAPI api = new MockTemplateProvider();
+    private ITemplateAPI api = new RemoteTemplateAPI();
 
     @Override
     public List<Category> GetCategories() {

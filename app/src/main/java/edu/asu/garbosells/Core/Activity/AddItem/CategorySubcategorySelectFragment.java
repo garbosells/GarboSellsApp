@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ import edu.asu.garbosells.Template.Subcategory;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CategorySubcategorySelectFragment.OnFragmentInteractionListener} interface
+ * {@link CategorySubcategorySelectFragment.OnCategorySubcategorySelectFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link CategorySubcategorySelectFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -36,36 +37,19 @@ public class CategorySubcategorySelectFragment extends Fragment implements Adapt
     private View subcategorySelectContainer;
     private Spinner subcategorySpinner;
     private Category selectedCategory;
+    private Subcategory selectedSubcategory;
+    private View view;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    private OnCategorySubcategorySelectFragmentInteractionListener mListener;
 
     public CategorySubcategorySelectFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CategorySubcategorySelectFragment.
-     */
     // TODO: Rename and change types and number of parameters
-    public static CategorySubcategorySelectFragment newInstance(String param1, String param2) {
+    public static CategorySubcategorySelectFragment newInstance() {
         CategorySubcategorySelectFragment fragment = new CategorySubcategorySelectFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -81,7 +65,7 @@ public class CategorySubcategorySelectFragment extends Fragment implements Adapt
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_category_subcategory_select, container, false);
+        view = inflater.inflate(R.layout.fragment_category_subcategory_select, container, false);
         categories = new TemplateAPI().GetCategories();
         Category nullSelection = new Category();
         nullSelection.id=-1;
@@ -110,25 +94,29 @@ public class CategorySubcategorySelectFragment extends Fragment implements Adapt
             //SET UP ADAPTER
             ArrayAdapter<Subcategory> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, subcategories);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            if(subcategories != null && subcategories.size() > 0)
+                selectedSubcategory = subcategories.get(0);
             subcategorySpinner.setAdapter(arrayAdapter);
             //SET SPINNER ON ITEM SELECTED LISTENER
             subcategorySpinner.setOnItemSelectedListener(this);
             subcategorySpinner.setVisibility(View.VISIBLE);
+
+            Button createButton = getActivity().findViewById(R.id.button_choose_subcategory);
+            createButton.setOnClickListener(view -> onButtonPressed());
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed() {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onSelectSubcategory(selectedSubcategory.id, selectedSubcategory.description);
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnCategorySubcategorySelectFragmentInteractionListener) {
+            mListener = (OnCategorySubcategorySelectFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -139,6 +127,7 @@ public class CategorySubcategorySelectFragment extends Fragment implements Adapt
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        view.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -157,6 +146,10 @@ public class CategorySubcategorySelectFragment extends Fragment implements Adapt
                 subcategorySelectContainer.setVisibility(View.VISIBLE);
             }
         }
+
+        if(selection.getClass() == Subcategory.class) {
+            selectedSubcategory = (Subcategory) selection;
+        }
     }
 
     @Override
@@ -174,8 +167,8 @@ public class CategorySubcategorySelectFragment extends Fragment implements Adapt
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnCategorySubcategorySelectFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onSelectSubcategory(long subcategory, String subcategoryDescription);
     }
 }

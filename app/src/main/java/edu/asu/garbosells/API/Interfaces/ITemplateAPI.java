@@ -8,7 +8,7 @@ import edu.asu.garbosells.Template.Subcategory;
 import edu.asu.garbosells.Template.Template;
 
 public interface ITemplateAPI {
-    List<Category> GetCategories();
-    List<Subcategory> GetSubcategoriesByCategoryId(long categoryId);
-    Template GetTemplateBySubcategoryId(long subcategoryId);
+     List<Category> GetCategories();
+     List<Subcategory> GetSubcategoriesByCategoryId(long categoryId);
+     Template GetTemplateBySubcategoryId(long subcategoryId);
 }
