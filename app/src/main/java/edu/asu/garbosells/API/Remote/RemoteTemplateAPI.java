@@ -38,6 +38,13 @@ public class RemoteTemplateAPI implements ITemplateAPI {
         }
     }
 
+    public class GetTemplateTask extends AsyncTask<Long, Void, Template> {
+        @Override
+        protected Template doInBackground(Long... longs) {
+            return GetTemplateBySubcategoryIdAsync(longs[0]);
+        }
+    }
+
     public List<Category> GetCategories() {
         try {
             return new GetCategoriesTask().execute("go").get();
@@ -58,6 +65,17 @@ public class RemoteTemplateAPI implements ITemplateAPI {
             e.printStackTrace();
         }
         return new ArrayList<>();
+    }
+
+    public Template GetTemplateBySubcategoryId(long subcategoryId) {
+        try {
+            return new GetTemplateTask().execute(subcategoryId).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private List<Category> GetCategoriesAsync() {
@@ -96,7 +114,7 @@ public class RemoteTemplateAPI implements ITemplateAPI {
         }
     }
 
-    public Template GetTemplateBySubcategoryId(long subcategoryId) {
+    public Template GetTemplateBySubcategoryIdAsync(long subcategoryId) {
         OkHttpClient client = new OkHttpClient();
         String url = String.format("https://categorydataservice.azurewebsites.net/api/Category/GetTemplateBySubcategoryId?subcategoryId=%d", subcategoryId);
         Request request = new Request.Builder()
