@@ -59,6 +59,7 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     long selectedSizeTypeId = -1;
     long selectedSizeValueId = -1;
     View sizeValueContainer;
+    View measurementsLayout;
 
     private Item item;
 
@@ -124,6 +125,11 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         int step = 2;
         if(template.category.hasSizing) {
             setupSizeInput(step);
+            step++;
+        }
+        if(template.category.hasMeasurements) {
+            setupMeasurementInput(step);
+            step++;
         }
     }
 
@@ -184,6 +190,14 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
 
             }
         });
+
+    }
+
+    private void setupMeasurementInput(int step) {
+        measurementsLayout = findViewById(R.id.input_measurements_layout);
+        measurementsLayout.setVisibility(View.VISIBLE);
+        TextView textViewStep = findViewById(R.id.textview_measurements_step_number);
+        textViewStep.setText(String.valueOf(step));
 
     }
 

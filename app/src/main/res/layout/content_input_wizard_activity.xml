@@ -20,7 +20,12 @@
         <include
             android:id="@+id/input_size_layout"
             layout="@layout/input_size"
-            android:visibility="invisible"/>
+            android:visibility="gone"/>
+        <include
+            android:id="@+id/input_measurements_layout"
+            layout="@layout/fragment_measurement_info"
+            android:visibility="gone"
+            />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

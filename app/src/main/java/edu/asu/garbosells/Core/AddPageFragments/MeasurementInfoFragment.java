@@ -19,7 +19,7 @@ import java.util.List;
 
 import edu.asu.garbosells.R;
 
-public class MeasurementInfoFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class MeasurementInfoFragment extends Fragment /*implements View.OnClickListener, AdapterView.OnItemSelectedListener*/ {
         private View view; //used to call upon components in resource file (onCreateView)
         private Boolean minimized = false; //used to minimize/maximize fragments in CardView when user proceeds to next step
         private static String label = ""; //label will be dynamically changed per item selected from Spinner
@@ -28,7 +28,7 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         public static String getText() { return label; }
         public static FragmentManager getMeasurementInfoFragmentManager() { return fragmentManager; }
 
-    @Nullable
+/*    @Nullable
     @Override //Fragment superclass
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -42,9 +42,9 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         //VIEW 'SELECTED/CLICKED' -> MAXIMIZE FRAGMENT
         view.setOnClickListener(this);
         return view;
-    }
+    }*/
 
-    @Override //Fragment superclass
+ /*   @Override //Fragment superclass
     public void onDestroyView() {
         super.onDestroyView();
     }
@@ -103,7 +103,7 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
 
         //-------------- ISSUE TRYING TO CHANGE TEXT VIEW LABEL DYNAMICALLY --------------
         //dynamicFragment.setLabel(label);
-    }
+    }*/
 
     public void removeCurrFragments() {
             fragmentManager = getChildFragmentManager();
@@ -119,7 +119,7 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
 
     }
 
-    private void minimize() {
+/*    private void minimize() {
         minimized = true;
         //HIDE BUTTONS
         view.findViewById(R.id.buttonNew).setVisibility(view.GONE);
@@ -133,9 +133,9 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
             fragmentTransaction.hide(f);
         }
         fragmentTransaction.commit();
-    }
+    }*/
 
-    private void maximize() {
+/*    private void maximize() {
         minimized = false;
 
         //SHOW BUTTONS
@@ -150,7 +150,7 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
             fragmentTransaction.show(f);
         }
         fragmentTransaction.commit();
-    }
+    }*/
 
     //-------------- SPINNER SET UP --------------
 
@@ -166,11 +166,11 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
         //SET SPINNER ON ITEM SELECTED LISTENER
-        spinner.setOnItemSelectedListener(this);
+        //spinner.setOnItemSelectedListener(this);
     }
 
     //-------------- SIMULATE CALL TO DATABASE FOR DYNAMIC LAYOUT --------------
-    @Override //AdapterView.OnItemSelectedListener interface
+   // @Override //AdapterView.OnItemSelectedListener interface
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long row_id) {
         //remove current fragments when spinner item is selected before adding in new dynamic fragments
         removeCurrFragments();
@@ -184,13 +184,13 @@ public class MeasurementInfoFragment extends Fragment implements View.OnClickLis
         if(layouts == null || labels == null)
             return;
 
-        //add in dynamic fragments to display
+/*        //add in dynamic fragments to display
         for(int j = 0; j < layouts.length; j++)
-            addDynamicFragment(layouts[j], labels[j]);
+            addDynamicFragment(layouts[j], labels[j]);*/
 
     }
 
-    @Override //AdapterView.OnItemSelectedListener interface
+    //@Override //AdapterView.OnItemSelectedListener interface
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
