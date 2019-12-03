@@ -108,7 +108,7 @@ public class CategorySubcategorySelectFragment extends Fragment implements Adapt
 
     public void onButtonPressed() {
         if (mListener != null) {
-            mListener.onSelectSubcategory(selectedSubcategory.id, selectedSubcategory.description);
+            mListener.onSelectSubcategory(selectedSubcategory);
         }
     }
 
@@ -169,6 +169,6 @@ public class CategorySubcategorySelectFragment extends Fragment implements Adapt
      */
     public interface OnCategorySubcategorySelectFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onSelectSubcategory(long subcategory, String subcategoryDescription);
+        void onSelectSubcategory(Subcategory subcategory);
     }
 }

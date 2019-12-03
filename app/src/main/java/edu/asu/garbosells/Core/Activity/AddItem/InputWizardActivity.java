@@ -2,10 +2,7 @@ package edu.asu.garbosells.Core.Activity.AddItem;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,17 +13,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
-import com.google.gson.Gson;
 
-import edu.asu.garbosells.API.TemplateAPI;
 import edu.asu.garbosells.Core.Activity.ListActivity;
 import edu.asu.garbosells.R;
-import edu.asu.garbosells.Template.Subcategory;
-import edu.asu.garbosells.Template.Template;
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.SettingsActivity;
 
-public class AddItemActivity extends AppCompatActivity implements CategorySubcategorySelectFragment.OnCategorySubcategorySelectFragmentInteractionListener {
+public class InputWizardActivity extends AppCompatActivity {
 
     private NavigationView nDrawer;
     private DrawerLayout mDrawer;
@@ -34,12 +27,11 @@ public class AddItemActivity extends AppCompatActivity implements CategorySubcat
     private ActionBarDrawerToggle mDrawerToggle;
     private String username;
     private CognitoUser user;
-    private Subcategory selectedSubcategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_item);
+        setContentView(R.layout.activity_input_wizard);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Set toolbar for this screen
@@ -51,7 +43,7 @@ public class AddItemActivity extends AppCompatActivity implements CategorySubcat
 
         // Set navigation drawer for this screen
         mDrawer = (DrawerLayout) findViewById(R.id.add_item_drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this,mDrawer, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
         mDrawer.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
@@ -87,7 +79,7 @@ public class AddItemActivity extends AppCompatActivity implements CategorySubcat
         mDrawer.closeDrawers();
 
         // Find which item was selected
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.nav_item_add_item:
                 goToAddItemActivity();
                 break;
@@ -125,26 +117,12 @@ public class AddItemActivity extends AppCompatActivity implements CategorySubcat
         exit();
     }
 
-    private void exit () {
+    private void exit() {
         Intent intent = new Intent();
-        if(username == null)
+        if (username == null)
             username = "";
-        intent.putExtra("name",username);
+        intent.putExtra("name", username);
         setResult(RESULT_OK, intent);
         finish();
-    }
-
-    @Override
-    public void onSelectSubcategory(Subcategory subcategory) {
-        FragmentManager supportFragmentManager = getSupportFragmentManager();
-        Fragment fragment = supportFragmentManager.findFragmentById(R.id.fragment_category_subcategory_select);
-        FragmentManager fragmentManager = fragment.getFragmentManager();
-        fragmentManager.beginTransaction().remove(fragment).commitNow();
-        supportFragmentManager.popBackStackImmediate();
-
-        Intent intent = new Intent(this, InputWizardActivity.class);
-        String json = new Gson().toJson(selectedSubcategory);
-        intent.putExtra("subcategory", json);
-        startActivity(intent);
     }
 }
