@@ -147,6 +147,11 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         }
         setupColorInput(step);
         step++;
+        setupDecadeInput(step);
+        step++;
+        setupMaterialInput(step);
+        step++;
+
     }
 
     private void updateShortDescription(String text) {
@@ -270,6 +275,8 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
                     ItemAttribute color = new ItemAttribute();
                     color.attributeRecommendationId = selection.id;
                     item.generalItemAttributes.primaryColor = color;
+                } else {
+                    item.generalItemAttributes.primaryColor = null;
                 }
             }
 
@@ -289,6 +296,8 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
                     ItemAttribute color = new ItemAttribute();
                     color.attributeRecommendationId = selection.id;
                     item.generalItemAttributes.secondaryColor = color;
+                } else {
+                    item.generalItemAttributes.secondaryColor = null;
                 }
             }
 
@@ -299,6 +308,73 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         });
     }
 
+    private void setupDecadeInput(int step) {
+        TextView stepview = findViewById(R.id.textview_decade_step_number);
+        stepview.setText(String.valueOf(step));
+
+        List<Recommendation> vals = template.generalAttributes.era.recommendations;
+        Recommendation nullRecommendation = new Recommendation();
+        nullRecommendation.id = -1;
+        nullRecommendation.description = "Select";
+        vals.add(0, nullRecommendation);
+        ArrayAdapter<Recommendation> decadeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, vals);
+        decadeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner decadeSpinner = findViewById(R.id.spinner_decade);
+        decadeSpinner.setAdapter(decadeAdapter);
+
+        decadeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Recommendation selection = (Recommendation) adapterView.getSelectedItem();
+                if(selection.id >= 0) {
+                    ItemAttribute decade = new ItemAttribute();
+                    decade.attributeRecommendationId = selection.id;
+                    item.generalItemAttributes.era = decade;
+                } else {
+                    item.generalItemAttributes.era = null;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void setupMaterialInput(int step) {
+        TextView stepview = findViewById(R.id.textview_material_step_number);
+        stepview.setText(String.valueOf(step));
+
+        List<Recommendation> vals = template.generalAttributes.material.recommendations;
+        Recommendation nullRecommendation = new Recommendation();
+        nullRecommendation.id = -1;
+        nullRecommendation.description = "Select";
+        vals.add(0, nullRecommendation);
+        ArrayAdapter<Recommendation> materialAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, vals);
+        materialAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner decadeSpinner = findViewById(R.id.spinner_material);
+        decadeSpinner.setAdapter(materialAdapter);
+
+        decadeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Recommendation selection = (Recommendation) adapterView.getSelectedItem();
+                if(selection.id >= 0) {
+                    ItemAttribute material = new ItemAttribute();
+                    material.attributeRecommendationId = selection.id;
+                    item.generalItemAttributes.material = material;
+                } else {
+                    item.generalItemAttributes.material = null;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
     // Handle when the a navigation item is selected
     private void setNavDrawer() {
         nDrawer.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

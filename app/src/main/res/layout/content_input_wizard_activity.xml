@@ -30,6 +30,15 @@
             layout="@layout/input_color"
             android:visibility="visible"
             />
-
+        <include
+            android:id="@+id/input_decade_layout"
+            layout="@layout/input_decade"
+            android:visibility="visible"
+            />
+        <include
+            android:id="@+id/input_material_layout"
+            layout="@layout/input_material"
+            android:visibility="visible"
+            />
     </LinearLayout>
 </ScrollView>
