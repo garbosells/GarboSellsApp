@@ -4,13 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import edu.asu.garbosells.Item.ItemMeasurement;
 import edu.asu.garbosells.R;
 
 public class SingleMeasurementFragment extends Fragment {
@@ -27,6 +31,7 @@ public class SingleMeasurementFragment extends Fragment {
 
     TextView hintText;
     TextView promptText;
+    EditText editText;
 
     private OnMeasurementChangeListener mListener;
 
@@ -61,15 +66,33 @@ public class SingleMeasurementFragment extends Fragment {
         View view = inflater.inflate(R.layout.input_single_measurement, container, false);
         hintText = view.findViewById(R.id.measurement_hint_text);
         promptText =  view.findViewById(R.id.input_measurement_prompt);
+        editText = view.findViewById(R.id.edittext_input_measurement);
         hintText.setText(mHint);
         promptText.setText(mLabel);
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                onMeasurementChange(editText.getText().toString());
+            }
+        });
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onMeasurementChange(String text) {
         if (mListener != null) {
-            mListener.onMeasurementChange();
+            ItemMeasurement measurement = new ItemMeasurement(mId, null, Double.parseDouble(text));
+            mListener.onMeasurementChange(measurement);
         }
     }
 
@@ -90,18 +113,8 @@ public class SingleMeasurementFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnMeasurementChangeListener {
         // TODO: Update argument type and name
-        void onMeasurementChange();
+        void onMeasurementChange(ItemMeasurement measurement);
     }
 }

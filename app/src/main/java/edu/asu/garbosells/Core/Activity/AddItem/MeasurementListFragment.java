@@ -20,14 +20,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.Template.Measurement;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MeasurementListFragment.OnMeasurementListFragmentListener} interface
- * to handle interaction events.
- * Use the {@link MeasurementListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MeasurementListFragment extends Fragment {
     private static final String MEASUREMENTS = "measurements";
     private static final String STEP = "step";

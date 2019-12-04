@@ -28,12 +28,17 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.asu.garbosells.API.Providers.TemplateProvider;
 import edu.asu.garbosells.Core.Activity.ListActivity;
 import edu.asu.garbosells.Item.Item;
+import edu.asu.garbosells.Item.ItemMeasurement;
 import edu.asu.garbosells.R;
+import edu.asu.garbosells.Template.Measurement;
 import edu.asu.garbosells.Template.Recommendation;
 import edu.asu.garbosells.Template.Size;
 import edu.asu.garbosells.Template.Subcategory;
@@ -63,6 +68,7 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     long selectedSizeValueId = -1;
     View sizeValueContainer;
     View measurementsLayout;
+    HashMap<Long, ItemMeasurement> measurementMap;
 
     private Item item;
 
@@ -197,6 +203,7 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     }
 
     private void setupMeasurementInput(int step) {
+        measurementMap = new HashMap<>();
         measurementsLayout = findViewById(R.id.input_measurement_layout);
         measurementsLayout.setVisibility(View.VISIBLE);
 
@@ -293,7 +300,25 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     }
 
     @Override
+    public void onMeasurementChange(ItemMeasurement measurement) {
+        if(item.measurements == null)
+            item.measurements = new ArrayList<>();
+        if(measurementMap.containsKey(measurement.categoryMeasurementId)) {
+            measurementMap.replace(measurement.categoryMeasurementId, measurement);
+        } else {
+            measurementMap.put(measurement.categoryMeasurementId, measurement);
+        }
+    }
+
+    @Override
     public void onMeasurementChange() {
 
+    }
+
+    public void onClickSubmit() {
+        item.measurements = new ArrayList<>();
+        measurementMap.forEach((k,v) -> {
+            item.measurements.add(v);
+        });
     }
 }
