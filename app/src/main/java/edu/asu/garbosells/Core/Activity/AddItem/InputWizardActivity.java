@@ -2,6 +2,7 @@ package edu.asu.garbosells.Core.Activity.AddItem;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -36,6 +37,7 @@ import java.util.Map;
 import edu.asu.garbosells.API.Providers.TemplateProvider;
 import edu.asu.garbosells.Core.Activity.ListActivity;
 import edu.asu.garbosells.Item.Item;
+import edu.asu.garbosells.Item.ItemAttribute;
 import edu.asu.garbosells.Item.ItemMeasurement;
 import edu.asu.garbosells.Item.ItemSize;
 import edu.asu.garbosells.R;
@@ -70,6 +72,8 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     View sizeValueContainer;
     View measurementsLayout;
     HashMap<Long, ItemMeasurement> measurementMap;
+
+
 
     private Item item;
 
@@ -141,6 +145,8 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
             setupMeasurementInput(step);
             step++;
         }
+        setupColorInput(step);
+        step++;
     }
 
     private void updateShortDescription(String text) {
@@ -195,6 +201,8 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
                     sizeValueSpinner.setAdapter(emptySizeValueAdapter);
                     sizeValueSpinner.setEnabled(false);
                     sizeValueContainer.setVisibility(View.VISIBLE);
+                    item.size = null;
+                    selectedSizeValueId = -1;
                 }
             }
 
@@ -212,6 +220,8 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
                 if(selectedSizeValueId >= 0 && selectedSizeTypeId >= 0) {
                     ItemSize size = new ItemSize(selectedSizeTypeId, selectedSizeValueId);
                     item.size = size;
+                } else {
+                    item.size = null;
                 }
             }
 
@@ -237,6 +247,56 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_measurement_list_placeholder, measurementListFragment);
         fragmentTransaction.commit();
+    }
+
+    private void setupColorInput(int step) {
+        TextView stepView = findViewById(R.id.textview_color_step_number);
+        stepView.setText(String.valueOf(step));
+
+        Spinner primaryColorSpinner = findViewById(R.id.spinner_color_primary);
+        List<Recommendation> colors =  template.generalAttributes.primaryColor.recommendations;
+        Recommendation nullColor = new Recommendation();
+        nullColor.id = -1;
+        nullColor.description="Select";
+        colors.add(0, nullColor);
+        ArrayAdapter<Recommendation> colorArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, colors);
+        colorArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        primaryColorSpinner.setAdapter(colorArrayAdapter);
+        primaryColorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Recommendation selection = (Recommendation) adapterView.getSelectedItem();
+                if(selection.id >= 0) {
+                    ItemAttribute color = new ItemAttribute();
+                    color.attributeRecommendationId = selection.id;
+                    item.generalItemAttributes.primaryColor = color;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        Spinner secondaryColorSpinner = findViewById(R.id.spinner_color_secondary);
+        secondaryColorSpinner.setAdapter(colorArrayAdapter);
+        secondaryColorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Recommendation selection = (Recommendation) adapterView.getSelectedItem();
+                if(selection.id >= 0) {
+                    ItemAttribute color = new ItemAttribute();
+                    color.attributeRecommendationId = selection.id;
+                    item.generalItemAttributes.secondaryColor = color;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     // Handle when the a navigation item is selected
