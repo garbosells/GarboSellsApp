@@ -40,5 +40,9 @@
             layout="@layout/input_material"
             android:visibility="visible"
             />
+        <include
+            android:id="@+id/input_submit_layout"
+            layout="@layout/input_wizard_submit"
+            android:visibility="visible"/>
     </LinearLayout>
 </ScrollView>

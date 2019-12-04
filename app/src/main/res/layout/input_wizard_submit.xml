@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<android.support.v7.widget.CardView
+    android:id="@+id/input_submit_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="4dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:cardUseCompatPadding="true"
+    android:elevation="5dp">
+
+    <LinearLayout
+        android:id="@+id/input_wizard_submit_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/input_wizard_post_options_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Post to:"
+                android:textSize="20dp"
+                android:textColor="@color/colorAccent"/>
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ebay"
+                android:textSize="20dp"
+                />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Etsy"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/input_submit_button_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:layout_gravity="start"
+                android:layout_alignParentStart="true"
+                android:textSize="17dp"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary"
+                android:layout_marginStart="75dp"
+                />
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_gravity="end"
+                android:layout_alignParentEnd="true"
+                android:textSize="17dp"
+                android:textColor="@color/white"
+                android:background="@color/colorAccent"
+                android:layout_marginEnd="75dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>
