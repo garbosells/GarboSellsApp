@@ -37,6 +37,7 @@ import edu.asu.garbosells.API.Providers.TemplateProvider;
 import edu.asu.garbosells.Core.Activity.ListActivity;
 import edu.asu.garbosells.Item.Item;
 import edu.asu.garbosells.Item.ItemMeasurement;
+import edu.asu.garbosells.Item.ItemSize;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.Template.Measurement;
 import edu.asu.garbosells.Template.Recommendation;
@@ -171,9 +172,12 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Size selection = (Size) adapterView.getSelectedItem();
+                selectedSizeTypeId = selection.sizeTypeId;
                 if(selection.sizeTypeId == 3) {
                     //one-size
                     sizeValueContainer.setVisibility(View.INVISIBLE);
+                    ItemSize size = new ItemSize(selection.sizeTypeId, 0);
+
                 }
                 else if(selection.sizeTypeId >= 0) {
                     List<Recommendation> options = selection.recommendations;
@@ -191,6 +195,23 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
                     sizeValueSpinner.setAdapter(emptySizeValueAdapter);
                     sizeValueSpinner.setEnabled(false);
                     sizeValueContainer.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        sizeValueSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Recommendation selection = (Recommendation) adapterView.getSelectedItem();
+                selectedSizeValueId = selection.id;
+                if(selectedSizeValueId >= 0 && selectedSizeTypeId >= 0) {
+                    ItemSize size = new ItemSize(selectedSizeTypeId, selectedSizeValueId);
+                    item.size = size;
                 }
             }
 
