@@ -3,6 +3,9 @@ package edu.asu.garbosells.Core.Activity.AddItem;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +43,7 @@ import edu.asu.garbosells.UserManagement.SettingsActivity;
 
 import static java.security.AccessController.getContext;
 
-public class InputWizardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class InputWizardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, MeasurementListFragment.OnMeasurementListFragmentListener, SingleMeasurementFragment.OnMeasurementChangeListener {
 
     private NavigationView nDrawer;
     private DrawerLayout mDrawer;
@@ -194,11 +197,18 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     }
 
     private void setupMeasurementInput(int step) {
-        measurementsLayout = findViewById(R.id.input_measurements_layout);
+        measurementsLayout = findViewById(R.id.input_measurement_layout);
         measurementsLayout.setVisibility(View.VISIBLE);
-        TextView textViewStep = findViewById(R.id.textview_measurements_step_number);
-        textViewStep.setText(String.valueOf(step));
 
+        TextView stepview = findViewById(R.id.textview_measurements_step_number);
+        if(stepview != null)
+            stepview.setText(String.valueOf(step));
+
+        Fragment measurementListFragment = MeasurementListFragment.newInstance(new Gson().toJson(template.measurements), step);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_measurement_list_placeholder, measurementListFragment);
+        fragmentTransaction.commit();
     }
 
     // Handle when the a navigation item is selected
@@ -279,6 +289,11 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    public void onMeasurementChange() {
 
     }
 }

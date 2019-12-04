@@ -32,7 +32,7 @@ public class MeasurementInfoFragment extends Fragment /*implements View.OnClickL
     @Override //Fragment superclass
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        view = inflater.inflate(R.layout.fragment_measurement_info, container, false);
+        view = inflater.inflate(R.layout.input_measurement_info, container, false);
 
         //SET UP SPINNER
         setupSpinner((Spinner)view.findViewById(R.id.spinnerSection));
@@ -58,7 +58,7 @@ public class MeasurementInfoFragment extends Fragment /*implements View.OnClickL
                     minimize();
                 break;
             //entire fragment section (wiz creation step) selected
-            case R.id.fragment_measurement_info:
+            case R.id.input_measurement_info:
                 if(minimized)
                     maximize();
                 break;

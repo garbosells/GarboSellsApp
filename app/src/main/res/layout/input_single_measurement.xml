@@ -12,15 +12,15 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/input_measurement_prompt"
-            android:layout_width="wrap_content"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:text="Section:"
             android:textColor="@color/colorAccent"
-            android:textSize="20dp"/>
+            android:textSize="17dp"/>
 
         <EditText
             android:id="@+id/edittext_input_measurement"
-            android:layout_width="100dp"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:maxLength="6"/>
@@ -31,14 +31,15 @@
             android:layout_height="wrap_content"
             android:text="inches"
             android:textColor="@color/colorAccent"
-            android:textSize="17dp"/>
+            android:textSize="15dp"/>
         <TextView
+            android:id="@+id/measurement_hint_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Measurement hint text"
-            android:textSize="17dp"
+            android:textSize="13dp"
             android:textStyle="italic"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             />
 
     </LinearLayout>
