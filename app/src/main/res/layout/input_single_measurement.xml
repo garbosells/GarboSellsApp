@@ -23,7 +23,7 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:maxLength="6"/>
+            android:maxLength="5"/>
 
         <TextView
             android:id="@+id/input_measurement_units"

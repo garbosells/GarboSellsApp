@@ -40,6 +40,19 @@
             layout="@layout/input_material"
             android:visibility="visible"
             />
+        <LinearLayout
+            android:id="@+id/attribute_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            >
+
+            <FrameLayout
+                android:id="@+id/fragment_attribute_list_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
         <include
             android:id="@+id/input_submit_layout"
             layout="@layout/input_wizard_submit"

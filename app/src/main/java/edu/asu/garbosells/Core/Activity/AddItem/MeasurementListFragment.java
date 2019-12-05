@@ -80,7 +80,7 @@ public class MeasurementListFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
+//            mListener.onAttributeFragmentInteraction(uri);
         }
     }
 
@@ -91,7 +91,7 @@ public class MeasurementListFragment extends Fragment {
             mListener = (OnMeasurementListFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnAttributeFragmentInteractionListener");
         }
     }
 

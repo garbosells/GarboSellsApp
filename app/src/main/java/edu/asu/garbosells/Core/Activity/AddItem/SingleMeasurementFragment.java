@@ -68,7 +68,7 @@ public class SingleMeasurementFragment extends Fragment {
         promptText =  view.findViewById(R.id.input_measurement_prompt);
         editText = view.findViewById(R.id.edittext_input_measurement);
         hintText.setText(mHint);
-        promptText.setText(mLabel);
+        promptText.setText(mLabel + ":");
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override

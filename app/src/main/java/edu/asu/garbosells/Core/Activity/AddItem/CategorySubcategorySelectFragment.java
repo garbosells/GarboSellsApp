@@ -119,7 +119,7 @@ public class CategorySubcategorySelectFragment extends Fragment implements Adapt
             mListener = (OnCategorySubcategorySelectFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnAttributeFragmentInteractionListener");
         }
     }
 
