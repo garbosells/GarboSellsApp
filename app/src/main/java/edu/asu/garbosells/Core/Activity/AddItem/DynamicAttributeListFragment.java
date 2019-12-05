@@ -63,14 +63,19 @@ public class DynamicAttributeListFragment extends Fragment implements AttributeF
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         AtomicInteger step = new AtomicInteger(startingStepNumber);
         attributeList.forEach(a -> {
+            step.getAndIncrement();
             String recommendationListJson = a.uiInputId == 0 ? new Gson().toJson(a.recommendations) : null;
             AttributeFragment fragment = AttributeFragment.newInstance(a.displayText, a.id, (int) a.uiInputId, step.intValue(), recommendationListJson);
             fragment.setListener(this);
             fragmentTransaction.add(R.id.layout_dynamic_attribute_list, fragment, "step"+step);
-            step.getAndIncrement();
         });
         fragmentTransaction.commit();
+        returnStep(step.intValue());
         return layout;
+    }
+
+    public void returnStep(int step) {
+        mListener.setNewStep(step);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -100,6 +105,7 @@ public class DynamicAttributeListFragment extends Fragment implements AttributeF
     public interface OnAttributeListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onAttributeListFragmentChange(ItemAttribute attribute);
+        void setNewStep(int step);
     }
 
     @Override

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minHeight="60dp"
     android:layout_marginTop="?attr/actionBarSize"
+    android:minHeight="60dp"
     tools:context="edu.asu.garbosells.Core.Activity.AddItem.InputWizardActivity">
 
     <LinearLayout
@@ -13,49 +13,56 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/input_description_layout"
-            layout="@layout/input_description"
-            android:visibility="visible"
-            />
+            android:id="@+id/input_title_layout"
+            layout="@layout/input_title"
+            android:visibility="visible" />
+
         <include
             android:id="@+id/input_size_layout"
             layout="@layout/input_size"
-            android:visibility="gone"/>
+            android:visibility="gone" />
+
         <include
             android:id="@+id/input_measurement_layout"
             layout="@layout/input_measurement_info"
-            android:visibility="gone"/>
+            android:visibility="gone" />
+
         <include
             android:id="@+id/input_color_layout"
             layout="@layout/input_color"
-            android:visibility="visible"
-            />
+            android:visibility="visible" />
+
         <include
             android:id="@+id/input_decade_layout"
             layout="@layout/input_decade"
-            android:visibility="visible"
-            />
+            android:visibility="visible" />
+
         <include
             android:id="@+id/input_material_layout"
             layout="@layout/input_material"
-            android:visibility="visible"
-            />
+            android:visibility="visible" />
 
-            <FrameLayout
-                android:id="@+id/fragment_attribute_list_placeholder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <LinearLayout
-                android:id="@+id/attribute_list_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                >
-                <include
-                    android:id="@+id/input_submit_layout"
-                    layout="@layout/input_wizard_submit"
-                    android:visibility="visible"/>
-            </LinearLayout>
+        <FrameLayout
+            android:id="@+id/fragment_attribute_list_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/input_description_layout"
+            layout="@layout/input_description"
+            android:visibility="visible"/>
+
+        <LinearLayout
+            android:id="@+id/attribute_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/input_submit_layout"
+                layout="@layout/input_wizard_submit"
+                android:visibility="visible" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

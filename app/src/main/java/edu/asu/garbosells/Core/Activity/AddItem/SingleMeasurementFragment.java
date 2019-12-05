@@ -90,7 +90,7 @@ public class SingleMeasurementFragment extends Fragment {
     }
 
     public void onMeasurementChange(String text) {
-        if (mListener != null) {
+        if (mListener != null && !text.isEmpty()) {
             ItemMeasurement measurement = new ItemMeasurement(mId, null, Double.parseDouble(text));
             mListener.onMeasurementChange(measurement);
         }

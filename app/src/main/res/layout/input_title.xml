@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/input_description"
+    android:id="@+id/input_title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:minHeight="60dp">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/input_description_cardview"
+        android:id="@+id/input_title_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -28,14 +28,14 @@
             android:layout_height="match_parent">
 
             <android.support.constraint.Guideline
-                android:id="@+id/input_description_guideline"
+                android:id="@+id/input_title_guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.15085158"/>
 
             <TextView
-                android:id="@+id/textview_description_step_number"
+                android:id="@+id/textview_title_step_number"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
@@ -44,36 +44,36 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/progress_circle"
                 android:gravity="center"
-                android:text="8"
+                android:text="1"
                 android:textColor="@color/color_white"
-                app:layout_constraintEnd_toStartOf="@+id/input_description_guideline"
+                app:layout_constraintEnd_toStartOf="@+id/input_title_guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textview_item_description_input_prompt"
+                android:id="@+id/textview_item_title_input_prompt"
                 style="@style/CustomFragmentLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Listing Description"
+                android:text="Listing Title"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/input_description_guideline"
+                app:layout_constraintStart_toStartOf="@+id/input_title_guideline"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/textview_item_description_input_prompt"/>
+                app:layout_constraintBottom_toTopOf="@id/textview_item_title_input_prompt"/>
 
             <TextView
-                android:id="@+id/input_description_hint"
+                android:id="@+id/input_title_hint"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/input_description_guideline"
+                app:layout_constraintStart_toStartOf="@+id/input_title_guideline"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_item_description_input_prompt"
-                app:layout_constraintBottom_toTopOf="@+id/description_input_container"
-                android:text="Limit 1000"
+                app:layout_constraintTop_toBottomOf="@id/textview_item_title_input_prompt"
+                app:layout_constraintBottom_toTopOf="@+id/title_input_container"
+                android:text="Limit 80"
                 android:textSize="17dp"
                 android:textStyle="italic"
                 android:layout_marginStart="8dp"
@@ -87,16 +87,16 @@
                 android:layout_marginBottom="8dp"
                 android:background="@color/colorAccent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textview_description_step_number"
-                app:layout_constraintStart_toStartOf="@+id/textview_description_step_number"
-                app:layout_constraintTop_toBottomOf="@id/textview_description_step_number" />
+                app:layout_constraintEnd_toEndOf="@+id/textview_title_step_number"
+                app:layout_constraintStart_toStartOf="@+id/textview_title_step_number"
+                app:layout_constraintTop_toBottomOf="@id/textview_title_step_number" />
 
             <LinearLayout
-                android:id="@+id/description_input_container"
+                android:id="@+id/title_input_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/input_description_hint"
-                app:layout_constraintStart_toEndOf="@+id/input_description_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/input_title_hint"
+                app:layout_constraintStart_toEndOf="@+id/input_title_guideline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:orientation="vertical"
@@ -106,12 +106,12 @@
                 android:padding="3dp"
                 >
                 <EditText
-                    android:id="@+id/edittext_description"
+                    android:id="@+id/edittext_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="200dp"
+                    android:minHeight="65dp"
                     android:inputType="textMultiLine"
-                    android:maxLength="1000"
+                    android:maxLength="80"
                     android:scrollHorizontally="false"
                     android:gravity="start|top"
                     android:background="@color/grey_100"

@@ -2,7 +2,6 @@ package edu.asu.garbosells.Core.Activity.AddItem;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,12 +13,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,11 +27,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Dictionary;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import edu.asu.garbosells.API.Providers.TemplateProvider;
 import edu.asu.garbosells.Core.Activity.ListActivity;
@@ -43,15 +41,12 @@ import edu.asu.garbosells.Item.ItemMeasurement;
 import edu.asu.garbosells.Item.ItemSize;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.Template.Attribute;
-import edu.asu.garbosells.Template.Measurement;
 import edu.asu.garbosells.Template.Recommendation;
 import edu.asu.garbosells.Template.Size;
 import edu.asu.garbosells.Template.Subcategory;
 import edu.asu.garbosells.Template.Template;
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.SettingsActivity;
-
-import static java.security.AccessController.getContext;
 
 public class InputWizardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
         MeasurementListFragment.OnMeasurementListFragmentListener, SingleMeasurementFragment.OnMeasurementChangeListener,
@@ -66,6 +61,7 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     private CognitoUser user;
     private Subcategory subcategory;
     private Template template;
+    private int step = 1;
 
     EditText editTextDescription;
 
@@ -117,31 +113,11 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         navHeaderSubTitle.setText(username);
 
         item = new Item();
-        item.categoryId = subcategory.category.id;
-        item.subcategoryId = subcategory.id;
         setupInputForm();
     }
 
     private void setupInputForm() {
-        editTextDescription = findViewById(R.id.edittext_short_description);
-        editTextDescription.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                updateShortDescription(editTextDescription.getText().toString().trim());
-            }
-        });
-
-        int step = 2;
+        step = 2;
         if(template.category.hasSizing) {
             setupSizeInput(step);
             step++;
@@ -157,7 +133,29 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         setupMaterialInput(step);
         step++;
         setupDynamicInputs(step);
+        setupDescriptionInput(step);
+        step++;
+        setupPriceInput(step);
+        setupSubmit();
 
+        Button submitButton = findViewById(R.id.submit_button);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickSubmit();
+            }
+        });
+    }
+
+    private void setupSubmit() {
+    }
+
+    private void setupPriceInput(int step) {
+    }
+
+    private void setupDescriptionInput(int step) {
+        TextView stepText = findViewById(R.id.textview_description_step_number);
+        stepText.setText(String.valueOf(step));
     }
 
     private void setupDynamicInputs(int step) {
@@ -179,8 +177,9 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         fragmentTransaction.commit();
     }
 
-    private void updateShortDescription(String text) {
-        item.setShortDescription(text);
+    @Override
+    public void setNewStep(int step) {
+        this.step = step+1;
     }
 
     private void setupSizeInput(int step) {
@@ -498,6 +497,14 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     }
 
     public void onClickSubmit() {
+        item.createdDateTime = new Date();
+        item.updatedDateTime = new Date();
+        item.categoryId = subcategory.category.id;
+        item.subcategoryId = subcategory.id;
+
+        item.shortDescription = ((EditText) findViewById(R.id.edittext_title)).getText().toString();
+        item.longDescription = ((EditText) findViewById(R.id.edittext_description)).getText().toString();
+
         item.measurements = new ArrayList<>();
         measurementMap.forEach((k,v) -> {
             item.measurements.add(v);
