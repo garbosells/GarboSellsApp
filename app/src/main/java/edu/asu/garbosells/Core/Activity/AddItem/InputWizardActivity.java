@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ import edu.asu.garbosells.Item.ItemAttribute;
 import edu.asu.garbosells.Item.ItemMeasurement;
 import edu.asu.garbosells.Item.ItemSize;
 import edu.asu.garbosells.R;
+import edu.asu.garbosells.Template.Attribute;
 import edu.asu.garbosells.Template.Measurement;
 import edu.asu.garbosells.Template.Recommendation;
 import edu.asu.garbosells.Template.Size;
@@ -51,7 +53,11 @@ import edu.asu.garbosells.UserManagement.SettingsActivity;
 
 import static java.security.AccessController.getContext;
 
-public class InputWizardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, MeasurementListFragment.OnMeasurementListFragmentListener, SingleMeasurementFragment.OnMeasurementChangeListener {
+public class InputWizardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
+        MeasurementListFragment.OnMeasurementListFragmentListener, SingleMeasurementFragment.OnMeasurementChangeListener,
+        DynamicAttributeListFragment.OnAttributeListFragmentInteractionListener, AttributeFragment.OnAttributeFragmentInteractionListener,
+        CompoundButton.OnCheckedChangeListener
+{
 
     private NavigationView nDrawer;
     private DrawerLayout mDrawer;
@@ -151,7 +157,17 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         step++;
         setupMaterialInput(step);
         step++;
+        setupDynamicInputs(step);
 
+    }
+
+    private void setupDynamicInputs(int step) {
+        List<Attribute> attributes = template.subcategory.attributes;
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment fragment = DynamicAttributeListFragment.newInstance(new Gson().toJson(attributes), step);
+        fragmentTransaction.add(R.id.fragment_attribute_list_placeholder, fragment);
+        fragmentTransaction.commit();
     }
 
     private void updateShortDescription(String text) {
@@ -478,4 +494,13 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
             item.measurements.add(v);
         });
     }
+
+    @Override
+    public void onAttributeListFragmentChange(ItemAttribute attribute) {}
+
+    @Override
+    public void onAttributeFragmentInteraction(ItemAttribute attribute) {}
+
+    @Override
+    public void onCheckedChanged(CompoundButton button, boolean isChecked) {}
 }

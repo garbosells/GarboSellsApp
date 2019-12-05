@@ -1,7 +1,6 @@
 package edu.asu.garbosells.Core.Activity.AddItem;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,7 +17,6 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import edu.asu.garbosells.Core.AddPageFragments.FragmentBoolean;
 import edu.asu.garbosells.Item.ItemAttribute;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.Template.Recommendation;
@@ -47,6 +45,8 @@ public class AttributeFragment extends Fragment implements CompoundButton.OnChec
 
     private FragmentManager fragmentManager;
 
+    private ItemAttribute attribute;
+
     public AttributeFragment() {
         // Required empty public constructor
     }
@@ -67,9 +67,11 @@ public class AttributeFragment extends Fragment implements CompoundButton.OnChec
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        attribute = new ItemAttribute();
         if (getArguments() != null) {
             mLabel = getArguments().getString(LABEL);
             mAttributeId = getArguments().getLong(ATTRIBUTE_ID);
+            attribute.subcategoryAttributeId = mAttributeId;
             mType = getArguments().getInt(INPUT_TYPE);
             mStep = getArguments().getInt(STEP_NUMBER);
 
@@ -129,12 +131,12 @@ public class AttributeFragment extends Fragment implements CompoundButton.OnChec
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        attribute.itemAttributeValue = isChecked ? "T" : "F";
+        mListener.onAttributeFragmentInteraction(attribute);
     }
 
     public interface OnAttributeFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onAttributeFragmentInteraction(ItemAttribute attribute);
     }
 }

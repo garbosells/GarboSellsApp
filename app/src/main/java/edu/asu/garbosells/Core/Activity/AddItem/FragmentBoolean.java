@@ -1,4 +1,4 @@
-package edu.asu.garbosells.Core.AddPageFragments;
+package edu.asu.garbosells.Core.Activity.AddItem;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,9 +13,6 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import java.util.List;
-
-import edu.asu.garbosells.Core.Activity.AddItem.SingleMeasurementFragment;
 import edu.asu.garbosells.R;
 
 public class FragmentBoolean extends Fragment {
@@ -23,6 +20,7 @@ public class FragmentBoolean extends Fragment {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private Switch toggle;
+    CompoundButton.OnCheckedChangeListener mListener;
 
 
     public FragmentBoolean() {
@@ -42,6 +40,7 @@ public class FragmentBoolean extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_input_boolean, container, false);
         toggle = (Switch) view.findViewById(R.id.switch_input_boolean);
+        toggle.setOnCheckedChangeListener(mListener);
         return view;
     }
 
@@ -49,7 +48,7 @@ public class FragmentBoolean extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof CompoundButton.OnCheckedChangeListener) {
-            toggle.setOnCheckedChangeListener((CompoundButton.OnCheckedChangeListener) context);
+            mListener = ((CompoundButton.OnCheckedChangeListener) context);
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnCheckedChangeListener");

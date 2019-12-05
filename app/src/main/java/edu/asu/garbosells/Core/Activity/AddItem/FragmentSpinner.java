@@ -1,4 +1,4 @@
-package edu.asu.garbosells.Core.AddPageFragments;
+package edu.asu.garbosells.Core.Activity.AddItem;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import edu.asu.garbosells.Core.AddPageFragments.DynamicFragmentContainer;
 import edu.asu.garbosells.R;
 
 public class FragmentSpinner extends DynamicFragmentContainer {
