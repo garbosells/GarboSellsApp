@@ -17,11 +17,7 @@ import edu.asu.garbosells.R;
 
 public class FragmentBoolean extends Fragment {
 
-    private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
     private Switch toggle;
-    CompoundButton.OnCheckedChangeListener mListener;
-
 
     public FragmentBoolean() {
         super();
@@ -40,18 +36,14 @@ public class FragmentBoolean extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_input_boolean, container, false);
         toggle = (Switch) view.findViewById(R.id.switch_input_boolean);
-        toggle.setOnCheckedChangeListener(mListener);
+
+        AttributeFragment parent = (AttributeFragment) getParentFragment();
+        toggle.setOnCheckedChangeListener(parent);
         return view;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof CompoundButton.OnCheckedChangeListener) {
-            mListener = ((CompoundButton.OnCheckedChangeListener) context);
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnCheckedChangeListener");
-        }
     }
 }

@@ -55,8 +55,7 @@ import static java.security.AccessController.getContext;
 
 public class InputWizardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
         MeasurementListFragment.OnMeasurementListFragmentListener, SingleMeasurementFragment.OnMeasurementChangeListener,
-        DynamicAttributeListFragment.OnAttributeListFragmentInteractionListener, AttributeFragment.OnAttributeFragmentInteractionListener,
-        CompoundButton.OnCheckedChangeListener
+        DynamicAttributeListFragment.OnAttributeListFragmentInteractionListener
 {
 
     private NavigationView nDrawer;
@@ -78,7 +77,7 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     View sizeValueContainer;
     View measurementsLayout;
     HashMap<Long, ItemMeasurement> measurementMap;
-
+    HashMap<Long, ItemAttribute> attributeMap;
 
 
     private Item item;
@@ -162,6 +161,16 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     }
 
     private void setupDynamicInputs(int step) {
+        attributeMap = new HashMap<>();
+        template.subcategory.attributes.forEach(a -> {
+            if(a.uiInputId == 5) {
+                ItemAttribute itemAttribute = new ItemAttribute();
+                itemAttribute.subcategoryAttributeId = a.id;
+                itemAttribute.itemAttributeValue = "F";
+                attributeMap.put(a.id, itemAttribute);
+            }
+        });
+
         List<Attribute> attributes = template.subcategory.attributes;
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -493,14 +502,24 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         measurementMap.forEach((k,v) -> {
             item.measurements.add(v);
         });
+
+        item.attributes = new ArrayList<>();
+        attributeMap.forEach((k,v) -> {
+            item.attributes.add(v);
+        });
     }
 
     @Override
-    public void onAttributeListFragmentChange(ItemAttribute attribute) {}
+    public void onAttributeListFragmentChange(ItemAttribute attribute) {
+        if(attribute.subcategoryAttributeId >= 0) {
+            if(item.attributes == null)
+                item.attributes = new ArrayList<>();
+            if(attributeMap.containsKey(attribute.subcategoryAttributeId)) {
+                attributeMap.replace(attribute.subcategoryAttributeId, attribute);
+            } else {
+                attributeMap.put(attribute.subcategoryAttributeId, attribute);
+            }
+        }
+    }
 
-    @Override
-    public void onAttributeFragmentInteraction(ItemAttribute attribute) {}
-
-    @Override
-    public void onCheckedChanged(CompoundButton button, boolean isChecked) {}
 }

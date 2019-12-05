@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ import edu.asu.garbosells.Item.ItemAttribute;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.Template.Recommendation;
 
-public class AttributeFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
+public class AttributeFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
     private static final String LABEL = "label";
     private static final String ATTRIBUTE_ID = "attribute_id";
     private static final String INPUT_TYPE = "input_type";
@@ -35,7 +36,7 @@ public class AttributeFragment extends Fragment implements CompoundButton.OnChec
     private long mAttributeId;
     private String returnValue;
     private long mValueId;
-    private List<Recommendation> recommendationList;
+    private String recommendationList;
     private int mType;
     private int mStep;
 
@@ -76,9 +77,7 @@ public class AttributeFragment extends Fragment implements CompoundButton.OnChec
             mStep = getArguments().getInt(STEP_NUMBER);
 
             if (mType == SPINNER_TYPE) {
-                String recommendationJson = getArguments().getString(RECOMMENDATIONS);
-                Type RecommendationListType = new TypeToken<List<Recommendation>>() {}.getType();
-                recommendationList = new Gson().fromJson(recommendationJson, RecommendationListType);
+                recommendationList = getArguments().getString(RECOMMENDATIONS);
             }
         }
     }
@@ -96,32 +95,21 @@ public class AttributeFragment extends Fragment implements CompoundButton.OnChec
 
         fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment;
         switch(mType) {
             case SPINNER_TYPE:
-//                Fragment fragment = SingleMeasurementFragment.newInstance(m.description, m.hint, m.id);
-//                fragmentTransaction.add(R.id.fragment_measurement_list, fragment, "tag"+tag);
+                FragmentSpinner fragmentSpinner = FragmentSpinner.newInstance(recommendationList);
+                fragmentTransaction.add(R.id.fragment_attribute_placeholder, fragmentSpinner);
+                fragmentTransaction.commit();
                 break;
             case SWITCH_TYPE:
-                fragment = FragmentBoolean.newInstance();
-                fragmentTransaction.add(R.id.fragment_attribute_placeholder, fragment);
+                FragmentBoolean fragmentBoolean = FragmentBoolean.newInstance();
+                fragmentTransaction.add(R.id.fragment_attribute_placeholder, fragmentBoolean);
                 fragmentTransaction.commit();
                 break;
             default:
                 break;
         }
         return layout;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnAttributeFragmentInteractionListener) {
-            mListener = (OnAttributeFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnAttributeFragmentInteractionListener");
-        }
     }
 
     @Override
@@ -134,6 +122,26 @@ public class AttributeFragment extends Fragment implements CompoundButton.OnChec
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
         attribute.itemAttributeValue = isChecked ? "T" : "F";
         mListener.onAttributeFragmentInteraction(attribute);
+    }
+
+    public void setListener(OnAttributeFragmentInteractionListener listener) {
+        mListener = listener;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Recommendation selection = (Recommendation) adapterView.getSelectedItem();
+        if(selection.id >= 0) {
+            ItemAttribute attribute = new ItemAttribute();
+            attribute.subcategoryAttributeId = mAttributeId;
+            attribute.attributeRecommendationId = selection.id;
+            mListener.onAttributeFragmentInteraction(attribute);
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
     public interface OnAttributeFragmentInteractionListener {

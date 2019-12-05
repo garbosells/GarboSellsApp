@@ -64,7 +64,8 @@ public class DynamicAttributeListFragment extends Fragment implements AttributeF
         AtomicInteger step = new AtomicInteger(startingStepNumber);
         attributeList.forEach(a -> {
             String recommendationListJson = a.uiInputId == 0 ? new Gson().toJson(a.recommendations) : null;
-            Fragment fragment = AttributeFragment.newInstance(a.displayText, a.id, (int) a.uiInputId, step.intValue(), recommendationListJson);
+            AttributeFragment fragment = AttributeFragment.newInstance(a.displayText, a.id, (int) a.uiInputId, step.intValue(), recommendationListJson);
+            fragment.setListener(this);
             fragmentTransaction.add(R.id.layout_dynamic_attribute_list, fragment, "step"+step);
             step.getAndIncrement();
         });
@@ -103,6 +104,6 @@ public class DynamicAttributeListFragment extends Fragment implements AttributeF
 
     @Override
     public void onAttributeFragmentInteraction(ItemAttribute attribute) {
-
+        mListener.onAttributeListFragmentChange(attribute);
     }
 }
