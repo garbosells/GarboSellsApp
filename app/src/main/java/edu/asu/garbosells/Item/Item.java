@@ -9,6 +9,7 @@ import java.util.List;
  * Represents an "Item" or "Listing" as it is represented in the app.
  */
 public class Item {
+    public String price;
     /**
      * The date/time when the item was originally created.
      *

@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,11 +35,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import edu.asu.garbosells.API.Providers.TemplateProvider;
+import edu.asu.garbosells.API.Remote.RemotePostListingAPI;
 import edu.asu.garbosells.Core.Activity.ListActivity;
 import edu.asu.garbosells.Item.Item;
 import edu.asu.garbosells.Item.ItemAttribute;
 import edu.asu.garbosells.Item.ItemMeasurement;
 import edu.asu.garbosells.Item.ItemSize;
+import edu.asu.garbosells.Item.Listing;
+import edu.asu.garbosells.Item.PostListingRequest;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.Template.Attribute;
 import edu.asu.garbosells.Template.Recommendation;
@@ -496,6 +500,14 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
 
     }
 
+    public boolean postToEbay() {
+        return ((CheckBox) findViewById(R.id.checkbox_ebay)).isChecked();
+    }
+
+    public boolean postToEtsy() {
+        return ((CheckBox) findViewById(R.id.checkbox_etsy)).isChecked();
+    }
+
     public void onClickSubmit() {
         item.createdDateTime = new Date();
         item.updatedDateTime = new Date();
@@ -505,15 +517,29 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         item.shortDescription = ((EditText) findViewById(R.id.edittext_title)).getText().toString();
         item.longDescription = ((EditText) findViewById(R.id.edittext_description)).getText().toString();
 
-        item.measurements = new ArrayList<>();
-        measurementMap.forEach((k,v) -> {
-            item.measurements.add(v);
-        });
+        if(measurementMap != null) {
+            item.measurements = new ArrayList<>();
+            measurementMap.forEach((k,v) -> {
+                item.measurements.add(v);
+            });
+        }
 
-        item.attributes = new ArrayList<>();
-        attributeMap.forEach((k,v) -> {
-            item.attributes.add(v);
-        });
+        if (attributeMap != null) {
+            item.attributes = new ArrayList<>();
+            attributeMap.forEach((k,v) -> {
+                item.attributes.add(v);
+            });
+        }
+
+        Listing listing = new Listing();
+        listing.inventoryItem = item;
+
+        PostListingRequest postListingRequest = new PostListingRequest();
+        postListingRequest.listing = listing;
+        postListingRequest.postToEbay = postToEbay();
+        postListingRequest.postToEtsy = postToEtsy();
+
+        new RemotePostListingAPI(this).PostListing(postListingRequest);
     }
 
     @Override

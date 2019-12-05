@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="edu.asu.garbosells">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,9 +16,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".Core.Activity.AddItem.InputWizardActivity"></activity>
-        <activity android:name=".Core.Activity.ListActivity" />
+        <activity android:name=".Core.Activity.ListActivity"
+                    android:label="ListActivity"
+            />
         <activity android:name=".Core.Activity.AddItem.AddItemActivity" />
         <activity
             android:name=".LaunchActivity"
