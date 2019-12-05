@@ -1,5 +1,7 @@
 package edu.asu.garbosells.Core.Activity.AddItem;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.design.widget.NavigationView;
@@ -539,7 +541,23 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         postListingRequest.postToEbay = postToEbay();
         postListingRequest.postToEtsy = postToEtsy();
 
-        new RemotePostListingAPI(this).PostListing(postListingRequest);
+        String result = new RemotePostListingAPI(this).PostListing(postListingRequest);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Post Listing Request Result");
+        alertDialogBuilder.setMessage(result);
+        alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                goToListActivity();
+            }
+        });
+        alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                goToListActivity();
+            }
+        });
+        alertDialogBuilder.create().show();
     }
 
     @Override

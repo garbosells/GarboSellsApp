@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import edu.asu.garbosells.API.Interfaces.IThirdPartyListingAPI;
+import edu.asu.garbosells.Core.Activity.AddItem.InputWizardActivity;
 import edu.asu.garbosells.Item.PostListingRequest;
 import edu.asu.garbosells.R;
 import edu.asu.garbosells.Template.Template;
@@ -23,43 +24,21 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class RemotePostListingAPI implements IThirdPartyListingAPI {
-    private Context context;
+    private InputWizardActivity context;
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
 
-    public RemotePostListingAPI(Context context) {
+    public RemotePostListingAPI(InputWizardActivity context) {
         this.context = context;
     }
 
     public class PostListingTask extends AsyncTask<PostListingRequest, Void, String> {
-        AlertDialog.Builder alertDialogBuilder;
         PostListingRequest request;
 
-        @Override
-        protected void onPreExecute() {
-            alertDialogBuilder = new AlertDialog.Builder(context);
-
-        }
         @Override
         protected String doInBackground(PostListingRequest... postListingRequests) {
             this.request = postListingRequests[0];
             return PostListingAsync(request);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            alertDialogBuilder.setTitle("Post Listing Request Result");
-            alertDialogBuilder.setMessage(result);
-            alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-//                    Intent intent = new Intent(context, ListActivity.class);
-//                    context.startActivity(intent);
-                }
-            });
-            alertDialogBuilder.create().show();
         }
     }
 
@@ -85,12 +64,13 @@ public class RemotePostListingAPI implements IThirdPartyListingAPI {
     }
 
     @Override
-    public void PostListing(PostListingRequest request) {
+    public String PostListing(PostListingRequest request) {
         try {
             request.listing.inventoryItem.price = "5.00";
-            new PostListingTask().execute(request);
+            return new PostListingTask().execute(request).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "";
     }
 }

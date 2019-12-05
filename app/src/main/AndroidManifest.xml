@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".Core.Activity.AddItem.InputWizardActivity"></activity>
-        <activity android:name=".Core.Activity.ListActivity"
+        <activity android:name="edu.asu.garbosells.Core.Activity.ListActivity"
                     android:label="ListActivity"
             />
         <activity android:name=".Core.Activity.AddItem.AddItemActivity" />
