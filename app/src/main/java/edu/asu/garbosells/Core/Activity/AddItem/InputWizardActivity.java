@@ -24,6 +24,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 import com.google.gson.Gson;
@@ -511,6 +512,11 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     }
 
     public void onClickSubmit() {
+        Button submitButton = findViewById(R.id.submit_button);
+        submitButton.setEnabled(false);
+        Toast.makeText(getApplicationContext(), "Processing", Toast.LENGTH_LONG).show();
+
+
         item.createdDateTime = new Date();
         item.updatedDateTime = new Date();
         item.categoryId = subcategory.category.id;
@@ -541,7 +547,7 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         postListingRequest.postToEbay = postToEbay();
         postListingRequest.postToEtsy = postToEtsy();
 
-        String result = new RemotePostListingAPI(this).PostListing(postListingRequest);
+        String result = new RemotePostListingAPI(this).PostListing(postListingRequest, this);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Post Listing Request Result");
         alertDialogBuilder.setMessage(result);
