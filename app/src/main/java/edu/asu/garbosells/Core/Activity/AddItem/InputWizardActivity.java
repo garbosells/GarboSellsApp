@@ -152,6 +152,7 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         setupDescriptionInput(step);
         step++;
         setupPriceInput(step);
+        step++;
         setupSubmit();
 
         userCanPost = userCanPost();
@@ -180,6 +181,8 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     }
 
     private void setupPriceInput(int step) {
+        TextView priceStep = findViewById(R.id.textview_price_step_number);
+        priceStep.setText(String.valueOf(step));
     }
 
     private void setupDescriptionInput(int step) {
@@ -579,6 +582,8 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
             });
         }
 
+        item.price = ((EditText) findViewById(R.id.edittext_price)).getText().toString();
+
         Listing listing = new Listing();
         listing.inventoryItem = item;
 
@@ -592,39 +597,44 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
             String result = new RemotePostListingAPI(this).PostListing(postListingRequest, this);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Post Listing Request Result");
-            Type PostResponseType = new TypeToken<PostResponse>() {
-            }.getType();
-            PostResponse response = new Gson().fromJson(result, PostResponseType);
-            PostResponse.SiteResponse testResponse = response.postEbayListingResponse;
-            String test = "isSUCC: " + Boolean.toString(testResponse.isSuccess) + "\nListingId: " + Long.toString(testResponse.listingId);
+            try {
+                Type PostResponseType = new TypeToken<PostResponse>() {
+                }.getType();
+                PostResponse response = new Gson().fromJson(result, PostResponseType);
+                PostResponse.SiteResponse testResponse = response.postEbayListingResponse;
 
-            Log.d("debug","PRINT" + testResponse.getlistingId());
-
-            String ebayString = "";
-            String etsyString = "";
-            //Ebay Stuff
-            if(postListingRequest.postToEbay == true){
-                PostResponse.SiteResponse EbayResponse = response.postEbayListingResponse;
-                if(EbayResponse.isSuccess == true){
-                    ebayString = "Posted to Ebay!\nListingId: " + EbayResponse.getlistingId();
+                String ebayString = "";
+                String etsyString = "";
+                //Ebay Stuff
+                if (postListingRequest.postToEbay) {
+                    PostResponse.SiteResponse EbayResponse = response.postEbayListingResponse;
+                    if (EbayResponse  != null && !EbayResponse.listingId.equals("") && EbayResponse.isSuccess) {
+                        ebayString = "Posted to Ebay!\nListingId: " + EbayResponse.listingId;
+                    } else {
+                        ebayString = "Attempted to post to Ebay, but Failed.\nError Message: " + EbayResponse.errorMessage;
+                    }
+                } else {
+                    ebayString = "Did not post to EBay.";
                 }
-                else{
-                    ebayString = "Attempted to post to Ebay, but Failed.\nError Message: " + EbayResponse.errorMessage;
+
+                //Etsy Stuff
+                if (postListingRequest.postToEtsy) {
+                    PostResponse.SiteResponse EtsyResponse = response.postEtsyListingResponse;
+                    if (EtsyResponse != null && !EtsyResponse.listingId.equals("") && EtsyResponse.isSuccess) {
+                        etsyString = "Posted to Etsy!\nListingId: " + EtsyResponse.listingId;
+                    } else {
+                        etsyString = "Attempted to post to Etsy, but Failed.\nError Message: " + EtsyResponse.errorMessage;
+                    }
+                } else {
+                    etsyString = "Did not post to Etsy.";
                 }
-            }else{ebayString = "Did not post to EBay.";}
 
-            //Etsy Stuff
-            if(postListingRequest.postToEtsy == true){
-                PostResponse.SiteResponse EtsyResponse = response.postEtsyListingResponse;
-                if(EtsyResponse.isSuccess == true){
-                    etsyString = "Posted to Etsy!\nListingId: " + EtsyResponse.getlistingId();
-                }else{
-                    etsyString = "Attempted to post to Etsy, but Failed.\nError Message: " + EtsyResponse.errorMessage;
-                }
-            }else{etsyString = "Did not post to Etsy.";}
+                alertDialogBuilder.setMessage("EBAY:\n" + ebayString + "\n\nETSY:\n" + etsyString);
+            } catch (Exception ex){
+                alertDialogBuilder.setMessage("Error posting listing. Please try again.\n" +
+                        "Error: " + ex.getMessage());
+            }
 
-
-            alertDialogBuilder.setMessage("EBAY:\n" + ebayString+ "\n\nETSY:\n" + etsyString);
             alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {

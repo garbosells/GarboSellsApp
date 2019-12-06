@@ -5,16 +5,14 @@ public class PostResponse {
     public SiteResponse postEtsyListingResponse;
 
     public class SiteResponse {
-        public long listingId;
-        public boolean isSuccess;
+        public String listingId;
+        public Boolean isSuccess;
         public String errorMessage;
 
-        public long getListingId() {
+        public String getListingId() {
             return listingId;
         }
-
-        public String getlistingId() {
-            return Long.toString(listingId);
-        }
     }
+    public Boolean isSuccess;
+    public String errorMessage;
 }

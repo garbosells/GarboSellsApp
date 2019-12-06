@@ -52,6 +52,11 @@
             layout="@layout/input_description"
             android:visibility="visible"/>
 
+        <include
+            android:id="@+id/input_price_layout"
+            layout="@layout/input_price"
+            android:visibility="visible"/>
+
         <LinearLayout
             android:id="@+id/attribute_list_container"
             android:layout_width="match_parent"
