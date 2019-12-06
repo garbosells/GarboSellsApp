@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -551,9 +552,39 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         String result = new RemotePostListingAPI(this).PostListing(postListingRequest, this);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Post Listing Request Result");
+
         Type PostResponseType = new TypeToken<PostResponse>(){}.getType();
         PostResponse response = new Gson().fromJson(result, PostResponseType);
-        alertDialogBuilder.setMessage(result);
+        PostResponse.SiteResponse testResponse = response.postEbayListingResponse;
+        String test = "isSUCC: " + Boolean.toString(testResponse.isSuccess) + "\nListingId: " + Long.toString(testResponse.listingId);
+
+        Log.d("debug","PRINT" + testResponse.getlistingId());
+
+        String ebayString = "";
+        String etsyString = "";
+        //Ebay Stuff
+        if(postListingRequest.postToEbay == true){
+            PostResponse.SiteResponse EbayResponse = response.postEbayListingResponse;
+            if(EbayResponse.isSuccess == true){
+                ebayString = "Posted to Ebay!\nListingId: " + EbayResponse.getlistingId();
+            }
+            else{
+                ebayString = "Posted to Ebay, but Failed.\nError Message: " + EbayResponse.errorMessage;
+            }
+        }else{ebayString = "Did not post to EBay.";}
+
+        //Etsy Stuff
+        if(postListingRequest.postToEtsy == true){
+            PostResponse.SiteResponse EtsyResponse = response.postEtsyListingResponse;
+            if(EtsyResponse.isSuccess == true){
+                etsyString = "Posted to Etsy!\nListingId: " + EtsyResponse.getlistingId();
+            }else{
+                etsyString = "Posted to Etsy, but Failed.\nError Message: " + EtsyResponse.errorMessage;
+            }
+        }else{etsyString = "Did not post to Etsy.";}
+
+
+        alertDialogBuilder.setMessage("EBAY\n" + ebayString+ "\nETSY\n" + etsyString);
         alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
