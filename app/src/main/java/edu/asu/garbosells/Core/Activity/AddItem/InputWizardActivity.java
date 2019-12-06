@@ -575,7 +575,7 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
                 ebayString = "Posted to Ebay!\nListingId: " + EbayResponse.getlistingId();
             }
             else{
-                ebayString = "Posted to Ebay, but Failed.\nError Message: " + EbayResponse.errorMessage;
+                ebayString = "Attempted to post to Ebay, but Failed.\nError Message: " + EbayResponse.errorMessage;
             }
         }else{ebayString = "Did not post to EBay.";}
 
@@ -585,12 +585,12 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
             if(EtsyResponse.isSuccess == true){
                 etsyString = "Posted to Etsy!\nListingId: " + EtsyResponse.getlistingId();
             }else{
-                etsyString = "Posted to Etsy, but Failed.\nError Message: " + EtsyResponse.errorMessage;
+                etsyString = "Attempted to post to Etsy, but Failed.\nError Message: " + EtsyResponse.errorMessage;
             }
         }else{etsyString = "Did not post to Etsy.";}
 
 
-        alertDialogBuilder.setMessage("EBAY\n" + ebayString+ "\nETSY\n" + etsyString);
+        alertDialogBuilder.setMessage("EBAY:\n" + ebayString+ "\n\nETSY:\n" + etsyString);
         alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
