@@ -40,6 +40,7 @@ import java.util.List;
 import edu.asu.garbosells.API.Providers.TemplateProvider;
 import edu.asu.garbosells.API.Remote.RemotePostListingAPI;
 import edu.asu.garbosells.Core.Activity.ListActivity;
+import edu.asu.garbosells.Core.Adapter.PostResponse;
 import edu.asu.garbosells.Item.Item;
 import edu.asu.garbosells.Item.ItemAttribute;
 import edu.asu.garbosells.Item.ItemMeasurement;
@@ -550,6 +551,8 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         String result = new RemotePostListingAPI(this).PostListing(postListingRequest, this);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Post Listing Request Result");
+        Type PostResponseType = new TypeToken<PostResponse>(){}.getType();
+        PostResponse response = new Gson().fromJson(result, PostResponseType);
         alertDialogBuilder.setMessage(result);
         alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
             @Override

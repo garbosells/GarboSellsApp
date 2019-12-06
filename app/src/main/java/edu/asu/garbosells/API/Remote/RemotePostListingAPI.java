@@ -5,7 +5,16 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -34,6 +43,16 @@ public class RemotePostListingAPI implements IThirdPartyListingAPI {
 
     public class PostListingTask extends AsyncTask<PostListingRequest, Void, String> {
         PostListingRequest request;
+        InputWizardActivity activity;
+
+        public PostListingTask(InputWizardActivity activity) {
+            this.activity = activity;
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
 
         @Override
         protected String doInBackground(PostListingRequest... postListingRequests) {
@@ -64,10 +83,10 @@ public class RemotePostListingAPI implements IThirdPartyListingAPI {
     }
 
     @Override
-    public String PostListing(PostListingRequest request) {
+    public String PostListing(PostListingRequest request, InputWizardActivity activity) {
         try {
             request.listing.inventoryItem.price = "5.00";
-            return new PostListingTask().execute(request).get();
+            return new PostListingTask(activity).execute(request).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
