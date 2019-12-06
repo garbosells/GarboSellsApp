@@ -154,6 +154,12 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
                 onClickSubmit();
             }
         });
+
+        Button cancelButton = findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { goToListActivity();};
+        });
     }
 
     private void setupSubmit() {
