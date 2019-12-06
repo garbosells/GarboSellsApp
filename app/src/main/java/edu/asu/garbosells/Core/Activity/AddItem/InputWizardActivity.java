@@ -55,6 +55,11 @@ import edu.asu.garbosells.Template.Subcategory;
 import edu.asu.garbosells.Template.Template;
 import edu.asu.garbosells.UserManagement.AppHelper;
 import edu.asu.garbosells.UserManagement.SettingsActivity;
+import edu.asu.garbosells.UserManagement.UserClasses.User;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class InputWizardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
         MeasurementListFragment.OnMeasurementListFragmentListener, SingleMeasurementFragment.OnMeasurementChangeListener,
@@ -83,6 +88,7 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     HashMap<Long, ItemMeasurement> measurementMap;
     HashMap<Long, ItemAttribute> attributeMap;
 
+    boolean userCanPost;
 
     private Item item;
 
@@ -145,6 +151,13 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         step++;
         setupPriceInput(step);
         setupSubmit();
+
+        userCanPost = userCanPost();
+
+        if(!userCanPost) {
+            View platformSelect = findViewById(R.id.input_wizard_post_options_container);
+            platformSelect.setVisibility(View.GONE);
+        }
 
         Button submitButton = findViewById(R.id.submit_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -484,6 +497,26 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         finish();
     }
 
+    public boolean userCanPost() {
+        String userLoginId = user.getUserId();
+        OkHttpClient client = new OkHttpClient();
+        String url = "https://listingservice.azurewebsites.net/api/Listing/PostListing";
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Connection","close")
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            String json = response.body().string();
+            Type UserType = new TypeToken<User>(){}.getType();
+            User garboSellsUser = new Gson().fromJson(json, UserType);
+            if(garboSellsUser != null)
+                return garboSellsUser.getRole().isCanPost();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -511,18 +544,16 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
     }
 
     public boolean postToEbay() {
-        return ((CheckBox) findViewById(R.id.checkbox_ebay)).isChecked();
+        return userCanPost && ((CheckBox) findViewById(R.id.checkbox_ebay)).isChecked();
     }
 
     public boolean postToEtsy() {
-        return ((CheckBox) findViewById(R.id.checkbox_etsy)).isChecked();
+        return userCanPost && ((CheckBox) findViewById(R.id.checkbox_etsy)).isChecked();
     }
 
     public void onClickSubmit() {
         Button submitButton = findViewById(R.id.submit_button);
         submitButton.setEnabled(false);
-        Toast.makeText(getApplicationContext(), "Processing", Toast.LENGTH_LONG).show();
-
 
         item.createdDateTime = new Date();
         item.updatedDateTime = new Date();
@@ -554,25 +585,31 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         postListingRequest.postToEbay = postToEbay();
         postListingRequest.postToEtsy = postToEtsy();
 
-        String result = new RemotePostListingAPI(this).PostListing(postListingRequest, this);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Post Listing Request Result");
-        Type PostResponseType = new TypeToken<PostResponse>(){}.getType();
-        PostResponse response = new Gson().fromJson(result, PostResponseType);
-        alertDialogBuilder.setMessage(result);
-        alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                goToListActivity();
-            }
-        });
-        alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                goToListActivity();
-            }
-        });
-        alertDialogBuilder.create().show();
+        if(userCanPost) {
+            Toast.makeText(getApplicationContext(), "Processing", Toast.LENGTH_LONG).show();
+            String result = new RemotePostListingAPI(this).PostListing(postListingRequest, this);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Post Listing Request Result");
+            Type PostResponseType = new TypeToken<PostResponse>() {
+            }.getType();
+            PostResponse response = new Gson().fromJson(result, PostResponseType);
+            alertDialogBuilder.setMessage(result);
+            alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    goToListActivity();
+                }
+            });
+            alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    goToListActivity();
+                }
+            });
+            alertDialogBuilder.create().show();
+        } else {
+            goToListActivity();
+        }
     }
 
     @Override
