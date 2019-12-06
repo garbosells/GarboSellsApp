@@ -146,8 +146,9 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         setupDecadeInput(step);
         step++;
         setupMaterialInput(step);
+        setupDynamicInputs();
         step++;
-        setupDynamicInputs(step);
+        step++;
         setupDescriptionInput(step);
         step++;
         setupPriceInput(step);
@@ -186,7 +187,7 @@ public class InputWizardActivity extends AppCompatActivity implements AdapterVie
         stepText.setText(String.valueOf(step));
     }
 
-    private void setupDynamicInputs(int step) {
+    private void setupDynamicInputs() {
         attributeMap = new HashMap<>();
         template.subcategory.attributes.forEach(a -> {
             if(a.uiInputId == 5) {
